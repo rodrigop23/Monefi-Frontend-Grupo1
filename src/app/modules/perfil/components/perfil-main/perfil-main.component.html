@@ -1,0 +1,79 @@
+<div class="perfil-main-container">
+  <shared-loading-screen *ngIf="loading"></shared-loading-screen>
+
+  <div class="topContainer">
+    <img
+      src="../../../../../assets/images/perfilTop.svg"
+      alt="Imagen de fondo"
+      class="topImage"
+      width="100%"
+    />
+
+    <div class="topTitle">Mi Perfil</div>
+
+    <div class="topUsername">
+      <img
+        src="../../../../../assets/icons/userEdit.svg"
+        alt="Imagen de usuario"
+      />
+
+      <div class="userName">{{ nombre }}</div>
+    </div>
+  </div>
+
+  <div class="optionsContainer">
+    <div class="sectionContainer">
+      <div class="sectionTitle">Cuenta</div>
+
+      <div class="itemContainer" routerLink="editar">
+        <div class="itemIconContainer">
+          <mat-icon>edit</mat-icon>
+        </div>
+        <div class="itemTitle">Cambiar Datos Personales</div>
+        <div class="arrowIconContainer">
+          <mat-icon class="arrowIcon">arrow_forward_ios</mat-icon>
+        </div>
+      </div>
+
+      <div class="itemContainer" routerLink="editar/password">
+        <div class="itemIconContainer">
+          <mat-icon>lock</mat-icon>
+        </div>
+        <div class="itemTitle">Cambiar Contraseña</div>
+        <div class="arrowIconContainer">
+          <mat-icon class="arrowIcon">arrow_forward_ios</mat-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="sectionContainer">
+      <div class="sectionTitle">Más Opciones</div>
+
+      <div class="itemContainer" routerLink="notificaciones">
+        <div class="itemIconContainer">
+          <mat-icon>notifications_active</mat-icon>
+        </div>
+        <div class="itemTitle">Notificaciones</div>
+        <div class="arrowIconContainer">
+          <mat-icon class="arrowIcon">arrow_forward_ios</mat-icon>
+        </div>
+      </div>
+
+      <div class="itemContainer">
+        <div class="itemIconContainer">
+          <mat-icon>settings_accessibility</mat-icon>
+        </div>
+        <div class="itemTitle">Accesibilidad</div>
+        <div class="arrowIconContainer">
+          <mat-icon class="arrowIcon">arrow_forward_ios</mat-icon>
+        </div>
+      </div>
+    </div>
+
+    <shared-default-button
+      text="Cerrar Sesión"
+      [defaultButton]="true"
+      (onClick)="cerrarSesion()"
+    ></shared-default-button>
+  </div>
+</div>

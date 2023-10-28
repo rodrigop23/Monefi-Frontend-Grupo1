@@ -1,0 +1,56 @@
+<div class="editar-contrasena-main-container">
+  <app-header
+    titulo="Cambiar Contraseña"
+    [back]="true"
+    path="/perfil"
+  ></app-header>
+
+  <div class="form-container">
+    <form>
+      <mat-form-field class="full-width">
+        <mat-label>Contraseña Actual</mat-label>
+        <input matInput [type]="ocultarActual ? 'password' : 'text'" />
+        <mat-icon
+          matSuffix
+          color="primary"
+          (click)="ocultarActual = !ocultarActual"
+        >
+          {{ ocultarActual ? "visibility_off" : "visibility" }}
+        </mat-icon>
+        <mat-error> </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Nueva Contraseña</mat-label>
+        <input matInput [type]="ocultarNueva ? 'password' : 'text'" />
+        <mat-icon
+          matSuffix
+          color="primary"
+          (click)="ocultarNueva = !ocultarNueva"
+        >
+          {{ ocultarNueva ? "visibility_off" : "visibility" }}
+        </mat-icon>
+        <mat-error> </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Confirmar Nueva Contraseña</mat-label>
+        <input matInput [type]="ocultarNueva ? 'password' : 'text'" />
+        <mat-icon
+          matSuffix
+          color="primary"
+          (click)="ocultarNueva = !ocultarNueva"
+        >
+          {{ ocultarNueva ? "visibility_off" : "visibility" }}
+        </mat-icon>
+        <mat-error> </mat-error>
+      </mat-form-field>
+    </form>
+
+    <shared-default-button
+      text="Actualizar Contraseña"
+      [defaultButton]="true"
+      (onClick)="onSubmit()"
+    ></shared-default-button>
+  </div>
+</div>

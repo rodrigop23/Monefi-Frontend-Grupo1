@@ -1,0 +1,9 @@
+.root-container {
+  display: flex;
+  flex-direction: column;
+  min-height: var(--full-height);
+}
+
+.footer {
+  margin-top: auto;
+}
