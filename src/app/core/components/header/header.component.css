@@ -1,0 +1,18 @@
+.header-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 0px;
+}
+
+.header-title {
+  color: var(--main-blue-color);
+  text-align: center;
+  font-family: inherit;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  flex: 1 1 0;
+}

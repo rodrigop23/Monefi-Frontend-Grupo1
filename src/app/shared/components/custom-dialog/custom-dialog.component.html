@@ -1,0 +1,19 @@
+<div class="dialog-mainContainer">
+  <div mat-dialog-title class="dialog-titulo">
+    {{ data.titulo }}
+  </div>
+  <div mat-dialog-content class="dialog-mensaje">{{ data.mensaje }}</div>
+  <div mat-dialog-actions class="botones-container">
+    <button
+      mat-button
+      *ngIf="data.confirmar"
+      [mat-dialog-close]="false"
+      class="dialog-boton"
+    >
+      Cancelar
+    </button>
+    <button mat-button [mat-dialog-close]="true" class="dialog-boton">
+      {{ data.confirmar ? "Confirmar" : "Continuar" }}
+    </button>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+.login-main-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.login-title {
+  text-align: center;
+  font-family: inherit;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.login-form-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}

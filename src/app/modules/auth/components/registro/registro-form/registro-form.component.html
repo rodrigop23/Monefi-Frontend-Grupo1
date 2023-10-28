@@ -1,0 +1,102 @@
+<div class="contenedor-formulario">
+  <shared-loading-screen *ngIf="loading"></shared-loading-screen>
+
+  <form [formGroup]="registroForm">
+    <mat-form-field
+      class="full-width"
+      [ngClass]="{ marginBottom: validarCamposFormulario('var_nombres') }"
+    >
+      <mat-label>Nombres</mat-label>
+      <input matInput type="text" formControlName="var_nombres" />
+      <mat-error>Ingrese su nombre completo</mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      class="full-width"
+      [ngClass]="{ marginBottom: validarCamposFormulario('var_apellidos') }"
+    >
+      <mat-label>Apellidos</mat-label>
+      <input matInput type="text" formControlName="var_apellidos" />
+      <mat-error>Ingrese su apellido completo</mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      class="full-width"
+      [ngClass]="{ marginBottom: validarCamposFormulario('var_correo') }"
+    >
+      <mat-label>Correo Electrónico</mat-label>
+      <input matInput type="email" formControlName="var_correo" />
+      <mat-error *ngIf="validarCamposFormulario('var_correo')">
+        {{ obtenerErrorCampoFormulario("var_correo") }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      class="full-width"
+      [ngClass]="{ marginBottom: validarCamposFormulario('var_contrasena') }"
+    >
+      <mat-label>Contraseña</mat-label>
+      <input
+        matInput
+        [type]="ocultarPrimero ? 'password' : 'text'"
+        formControlName="var_contrasena"
+      />
+      <mat-icon
+        matSuffix
+        color="primary"
+        (click)="ocultarPrimero = !ocultarPrimero"
+      >
+        {{ ocultarPrimero ? "visibility_off" : "visibility" }}
+      </mat-icon>
+      <mat-error *ngIf="validarCamposFormulario('var_contrasena')">
+        {{ obtenerErrorCampoFormulario("var_contrasena") }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Confirmar Contraseña</mat-label>
+      <input
+        matInput
+        [type]="ocultarPrimero ? 'password' : 'text'"
+        formControlName="var_confirmar_contrasena"
+      />
+      <mat-icon
+        matSuffix
+        color="primary"
+        (click)="ocultarPrimero = !ocultarPrimero"
+      >
+        {{ ocultarPrimero ? "visibility_off" : "visibility" }}
+      </mat-icon>
+      <mat-error *ngIf="validarCamposFormulario('var_confirmar_contrasena')">
+        {{ obtenerErrorCampoFormulario("var_confirmar_contrasena") }}
+      </mat-error>
+    </mat-form-field>
+
+    <section>
+      <div class="checkbox-container">
+        <mat-checkbox color="primary" formControlName="terminos"></mat-checkbox>
+        <div class="checkbox">
+          Acepta los<span class="terms" (click)="abrirDialogoTerminos()">
+            Términos y Condiciones
+          </span>
+        </div>
+      </div>
+      <mat-error *ngIf="validarCamposFormulario('terminos')" class="mat-error">
+        {{ obtenerErrorCampoFormulario("terminos") }}
+      </mat-error>
+    </section>
+  </form>
+
+  <div class="boton-container">
+    <shared-default-button
+      text="Registrarse"
+      (onClick)="onSubmit()"
+      [defaultButton]="true"
+    ></shared-default-button>
+
+    <div class="last-row">
+      <div class="last-text">¿Ya tienes una cuenta?</div>
+      <div routerLink="/auth/login" class="login-text">Ingresar</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+.transaccion-main-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px 32px 16px;
+}
+
+.contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.accordion-panel {
+  border: 1px solid var(--main-blue-color);
+}
+
+.accordion-header {
+  color: var(--main-blue-color);
+  font-family: inherit;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.transaccion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

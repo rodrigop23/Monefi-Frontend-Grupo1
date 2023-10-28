@@ -1,0 +1,131 @@
+.estadistica-main-container {
+  min-height: var(--full-height);
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px 16px 16px;
+}
+
+.limite-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.limite-title {
+  color: #999;
+  font-family: inherit;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.limite-monto {
+  color: #333;
+  font-family: inherit;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.mes-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.grafico-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.gasto-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.gasto-title {
+  color: #999;
+  font-family: inherit;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.gasto-monto-container {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.gasto-monto {
+  color: var(--main-blue-color);
+  text-align: center;
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: inherit;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.porcentaje-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.icon-green {
+  color: #119d7f;
+}
+
+.icon-red {
+  color: #e83f5b;
+}
+
+.porcentaje-text {
+  font-feature-settings: "clig" off, "liga" off;
+  font-family: inherit;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.categoria-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.categoria-title {
+  color: #999;
+  font-family: inherit;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.transaccion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.no-data-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}

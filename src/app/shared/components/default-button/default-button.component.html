@@ -1,0 +1,10 @@
+<button
+  mat-button
+  (click)="onPress()"
+  [ngClass]="defaultButton ? 'default-button' : 'add-button'"
+>
+  <mat-icon *ngIf="!defaultButton" color="primary" class="custom-icon">
+    add
+  </mat-icon>
+  <span>{{ text }}</span>
+</button>

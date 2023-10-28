@@ -1,0 +1,20 @@
+<div class="tarjeta-main-container">
+  <app-header titulo="Tus Tarjetas"></app-header>
+
+  <div class="contenido">
+    <div *ngFor="let tarjeta of dataTarjetas">
+      <shared-custom-tarjeta
+        [tarjeta]="tarjeta"
+        [menu]="true"
+      ></shared-custom-tarjeta>
+    </div>
+
+    <ng-container *ngIf="dataTarjetas.length < 5">
+      <shared-default-button
+        text="Agregar Tarjeta"
+        [defaultButton]="false"
+        routerLink="/tarjeta/registrar"
+      ></shared-default-button>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="custom-tarjeta-main-container">
+  <div class="imagen">
+    <div class="tarjetaTitle">Tarjeta de {{ tarjeta.var_tipo }}</div>
+
+    <div class="tarjetaName">{{ tarjeta.var_nombre }}</div>
+
+    <div class="tarjetaPrice">
+      {{ tarjeta.simbolo_moneda + " " + (tarjeta.total_transacciones || 0) }}
+    </div>
+
+    <ng-container *ngIf="menu">
+      <div class="tarjetaIcon">
+        <button mat-icon-button [matMenuTriggerFor]="menu" class="menuIcon">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+
+        <!-- Menu Principal -->
+        <mat-menu #menu="matMenu" xPosition="before" yPosition="below">
+          <button
+            mat-menu-item
+            [routerLink]="['/tarjeta/detalle/', tarjeta.PK_tarjeta]"
+          >
+            <mat-icon>info</mat-icon>
+            <span>Información</span>
+          </button>
+
+          <button
+            mat-menu-item
+            [routerLink]="['/tarjeta/editar/', tarjeta.PK_tarjeta]"
+          >
+            <mat-icon>edit</mat-icon>
+            <span>Editar</span>
+          </button>
+
+          <button mat-menu-item (click)="abrirDialogoEliminarTarjeta()">
+            <mat-icon>delete</mat-icon>
+            <span>Eliminar</span>
+          </button>
+
+          <mat-divider></mat-divider>
+
+          <button mat-menu-item [matMenuTriggerFor]="beneficio">
+            <mat-icon>redeem</mat-icon>
+            <span>Beneficios</span>
+          </button>
+        </mat-menu>
+
+        <!-- Menu Beneficios -->
+        <mat-menu #beneficio="matMenu">
+          <ng-container *ngIf="!tarjeta.FK_beneficio">
+            <button
+              mat-menu-item
+              [routerLink]="['/beneficio/registrar/', tarjeta.PK_tarjeta]"
+            >
+              <mat-icon>add</mat-icon>
+              <span>Agregar</span>
+            </button>
+          </ng-container>
+
+          <ng-container *ngIf="tarjeta.FK_beneficio">
+            <button
+              mat-menu-item
+              [routerLink]="['/beneficio/editar/', tarjeta.PK_tarjeta]"
+            >
+              <mat-icon>edit</mat-icon>
+              <span>Editar</span>
+            </button>
+
+            <button mat-menu-item (click)="abrirDialogoEliminarBeneficio()">
+              <mat-icon>delete</mat-icon>
+              <span>Eliminar</span>
+            </button>
+          </ng-container>
+        </mat-menu>
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="detalle-main-container">
+  <app-header
+    titulo="Historial de Gastos"
+    [back]="true"
+    path="/tarjeta"
+  ></app-header>
+
+  <div class="detalle-tarjeta">
+    <shared-custom-tarjeta
+      [tarjeta]="dataTarjeta"
+      [menu]="false"
+    ></shared-custom-tarjeta>
+  </div>
+
+  <div class="transaccion-list">
+    <div *ngIf="dataTransacciones.length === 0" class="no-transaccion-data">
+      <div class="text-no-data">No hay transacciones registradas</div>
+      <shared-default-button
+        [defaultButton]="false"
+        text="Registrar transaccion"
+        routerLink="/transaccion/registrar"
+      ></shared-default-button>
+    </div>
+
+    <ng-container *ngFor="let transaccion of dataTransacciones">
+      <shared-list-item [transaccion]="transaccion"></shared-list-item>
+    </ng-container>
+  </div>
+</div>

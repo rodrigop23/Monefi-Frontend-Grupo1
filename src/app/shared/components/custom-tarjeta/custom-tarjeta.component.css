@@ -1,0 +1,66 @@
+.custom-tarjeta-main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagen {
+  background-image: url("../../../../assets/images/mainTarjeta.svg");
+  background-size: cover;
+  width: 327px;
+  height: 208px;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.tarjetaTitle {
+  color: rgba(255, 255, 255, 0.8);
+  font-family: inherit;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  position: absolute;
+  top: 24px;
+  left: 24px;
+}
+
+.tarjetaName {
+  color: #faf9ff;
+  font-family: inherit;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  position: absolute;
+  top: 72px;
+  left: 24px;
+}
+
+.tarjetaPrice {
+  color: #faf9ff;
+  font-family: inherit;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+}
+
+.tarjetaIcon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.menuIcon {
+  color: #ffffff;
+}
+
+.anchor {
+  text-decoration: none;
+  color: #000000de;
+}

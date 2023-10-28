@@ -1,0 +1,58 @@
+<div class="contenedor-formulario">
+  <shared-loading-screen *ngIf="loading"></shared-loading-screen>
+
+  <form [formGroup]="loginForm">
+    <mat-form-field
+      class="full-width"
+      [ngClass]="{ marginBottom: validarCamposFormulario('var_correo') }"
+    >
+      <mat-label>Correo Electrónico</mat-label>
+      <input matInput type="email" formControlName="var_correo" />
+      <mat-error *ngIf="validarCamposFormulario('var_correo')">
+        {{ obtenerErrorCampoFormulario("var_correo") }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      class="full-width"
+      [ngClass]="{ marginBottom: validarCamposFormulario('var_contrasena') }"
+    >
+      <mat-label>Contraseña</mat-label>
+      <input
+        matInput
+        [type]="ocultarPrimero ? 'password' : 'text'"
+        formControlName="var_contrasena"
+      />
+      <mat-icon
+        matSuffix
+        color="primary"
+        (click)="ocultarPrimero = !ocultarPrimero"
+      >
+        {{ ocultarPrimero ? "visibility_off" : "visibility" }}
+      </mat-icon>
+      <mat-error *ngIf="validarCamposFormulario('var_contrasena')">
+        {{ obtenerErrorCampoFormulario("var_contrasena") }}
+      </mat-error>
+    </mat-form-field>
+
+    <div class="below-inputs">
+      <!-- <mat-checkbox color="primary" formControlName="recordar">
+        Recuérdame
+      </mat-checkbox> -->
+      <div class="forgot-password">¿Olvidaste tu contraseña?</div>
+    </div>
+  </form>
+
+  <div class="boton-container">
+    <shared-default-button
+      text="Ingresar"
+      (onClick)="onSubmit()"
+      [defaultButton]="true"
+    ></shared-default-button>
+
+    <div class="last-row">
+      <div class="last-text">¿No tienes una cuenta?</div>
+      <div routerLink="/auth/registro" class="login-text">Regístrate</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<div class="header-container">
+  <div [routerLink]="path" *ngIf="back">
+    <mat-icon color="primary">arrow_back_ios</mat-icon>
+  </div>
+  <div class="header-title">{{ titulo | titlecase }}</div>
+</div>

@@ -1,0 +1,17 @@
+.transaccion-form-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.radio-group-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.radio-group-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

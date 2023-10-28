@@ -1,0 +1,15 @@
+.tarjeta-form-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.first-row {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 21.6px;
+}

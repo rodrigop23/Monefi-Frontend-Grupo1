@@ -1,0 +1,147 @@
+<div class="tarjeta-form-container">
+  <shared-loading-screen *ngIf="loading"></shared-loading-screen>
+
+  <form [formGroup]="tarjetaForm">
+    <div class="first-row">
+      <img
+        src="../../../../../../assets/images/{{ tipoAccion }}Tarjeta.svg"
+        alt="Imagen Tarjeta"
+      />
+
+      <div>
+        <label id="radio-group" class="sub-title-form">Tipo de tarjeta</label>
+        <mat-radio-group
+          aria-labelledby="radio-group"
+          color="primary"
+          formControlName="var_tipo"
+          (change)="seleccionarTipoTarjeta($event.value)"
+        >
+          <mat-radio-button
+            *ngFor="let tarjeta of tipoTarjetas"
+            [value]="tarjeta.nombre"
+            [disabled]="tipoAccion === 'editar'"
+          >
+            {{ tarjeta.nombre }}
+          </mat-radio-button>
+        </mat-radio-group>
+        <mat-error
+          *ngIf="validarCamposFormulario('var_tipo')"
+          class="mat-error"
+        >
+          Seleccione un tipo
+        </mat-error>
+      </div>
+    </div>
+
+    <ng-container *ngIf="tarjetaForm.controls['var_tipo'].value === 'Crédito'">
+      <div class="sub-title-form">Datos de Facturación</div>
+
+      <div class="input-two-container">
+        <mat-form-field class="full-width">
+          <mat-label>Fecha inicio</mat-label>
+          <input
+            matInput
+            [matDatepicker]="pickerOne"
+            formControlName="dte_inicio_facturacion"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="pickerOne"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #pickerOne></mat-datepicker>
+          <mat-error>Seleccione una fecha</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Fecha fin</mat-label>
+          <input
+            matInput
+            [matDatepicker]="pickerTwo"
+            formControlName="dte_fin_facturacion"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="pickerTwo"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #pickerTwo></mat-datepicker>
+          <mat-error>Seleccione una fecha</mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field class="full-width">
+        <mat-label>Fecha de pago</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerThree"
+          formControlName="dte_dia_pago"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="pickerThree"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerThree></mat-datepicker>
+        <mat-error>Seleccione una fecha</mat-error>
+      </mat-form-field>
+    </ng-container>
+
+    <ng-container>
+      <div class="sub-title-form">Datos de la Tarjeta</div>
+
+      <mat-form-field class="full-width">
+        <mat-label>Nombre de la Tarjeta</mat-label>
+        <input matInput type="text" formControlName="var_nombre" />
+        <mat-error>Ingrese un nombre</mat-error>
+      </mat-form-field>
+
+      <div
+        class="input-two-container"
+        [ngClass]="{
+          marginBottomExtra:
+            validarCamposFormulario('FK_tarjeta_entidad') ||
+            validarCamposFormulario('FK_tarjeta_moneda')
+        }"
+      >
+        <mat-form-field class="full-width">
+          <mat-label>Entidad</mat-label>
+          <mat-select formControlName="FK_tarjeta_entidad">
+            <mat-option
+              *ngFor="let entidad of dataDropdownEntidades"
+              [value]="entidad.ID"
+            >
+              {{ entidad.var_nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-error>Seleccione una entidad</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-label>Moneda</mat-label>
+          <mat-select formControlName="FK_tarjeta_moneda">
+            <mat-option
+              *ngFor="let entidad of dataDropdownMonedas"
+              [value]="entidad.ID"
+            >
+              {{ entidad.var_nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-error>Seleccione una moneda</mat-error>
+        </mat-form-field>
+      </div>
+    </ng-container>
+
+    <ng-container>
+      <div class="sub-title-form">Opcional</div>
+
+      <mat-form-field class="full-width">
+        <mat-label>Límite de Gasto</mat-label>
+        <input matInput type="number" formControlName="num_lim_gasto" />
+      </mat-form-field>
+    </ng-container>
+  </form>
+
+  <shared-default-button
+    text="{{ tipoAccion == 'editar' ? 'Actualizar' : 'Registrar' }} Tarjeta"
+    [defaultButton]="true"
+    (onClick)="onSubmit()"
+  ></shared-default-button>
+</div>

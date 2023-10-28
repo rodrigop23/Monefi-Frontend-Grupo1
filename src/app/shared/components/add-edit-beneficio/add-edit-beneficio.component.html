@@ -1,0 +1,63 @@
+<div class="beneficio-form-container">
+  <shared-loading-screen *ngIf="loading"></shared-loading-screen>
+
+  <form [formGroup]="beneficioForm">
+    <div class="first-row">
+      <img
+        src="../../../../../assets/images/editarTarjeta.svg"
+        alt="Editar tarjeta"
+      />
+
+      <div>
+        <label id="radio-group" class="sub-title-form">Tipo de tarjeta</label>
+        <mat-radio-group
+          aria-labelledby="radio-group"
+          color="primary"
+          formControlName="var_tipo"
+        >
+          <mat-radio-button
+            *ngFor="let tarjeta of tipoTarjetas"
+            [value]="tarjeta.nombre"
+          >
+            {{ tarjeta.nombre }}
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+
+    <div>
+      <div class="sub-title-form">Beneficios de la Tarjeta</div>
+
+      <mat-form-field class="full-width">
+        <mat-label>Entidad</mat-label>
+        <mat-select formControlName="FK_tarjeta_entidad">
+          <mat-option
+            *ngFor="let entidad of dataDropdownEntidades"
+            [value]="entidad.ID"
+          >
+            {{ entidad.var_nombre }}
+          </mat-option>
+        </mat-select>
+        <mat-error>Seleccione una entidad</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Nombre del Beneficio</mat-label>
+        <input matInput type="text" formControlName="var_nombre" />
+        <mat-error>Ingrese un nombre</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Valor de milla por unidad de consumo</mat-label>
+        <input matInput type="number" formControlName="num_valor" />
+        <mat-error>Ingrese un nombre</mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+
+  <shared-default-button
+    text="{{ tipoAccion == 'editar' ? 'Actualizar' : 'Registrar' }} Beneficio"
+    [defaultButton]="true"
+    (onClick)="onSubmit()"
+  ></shared-default-button>
+</div>

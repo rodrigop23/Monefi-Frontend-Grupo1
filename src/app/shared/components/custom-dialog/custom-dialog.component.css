@@ -1,0 +1,16 @@
+.dialog-titulo {
+  color: var(--main-blue-color);
+}
+
+.dialog-mensaje {
+  text-align: justify;
+}
+
+.botones-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dialog-boton {
+  color: var(--main-blue-color);
+}

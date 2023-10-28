@@ -1,0 +1,26 @@
+<div class="itemList" [matMenuTriggerFor]="menu">
+  <div class="first-container">
+    <div class="itemListName">{{ transaccion.var_nombre }}</div>
+    <div class="itemListDate">
+      {{ transaccion.dte_fecha | date : "longDate" : "es-PE" }}
+    </div>
+  </div>
+  <div class="itemListPayment">
+    <div>{{ transaccion.var_simbolo + " " + transaccion.num_monto }}</div>
+  </div>
+
+  <mat-menu #menu="matMenu" xPosition="before" yPosition="below">
+    <button
+      mat-menu-item
+      [routerLink]="['/transaccion/editar/', transaccion.PK_transaccion]"
+    >
+      <mat-icon>edit</mat-icon>
+      <span>Editar</span>
+    </button>
+
+    <button mat-menu-item (click)="abrirDialogoEliminar()">
+      <mat-icon>delete</mat-icon>
+      <span>Eliminar</span>
+    </button>
+  </mat-menu>
+</div>
