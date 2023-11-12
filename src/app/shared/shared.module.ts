@@ -13,6 +13,8 @@ import { ListItemComponent } from './components/list-item/list-item.component';
 import { AddEditTarjetaComponent } from './components/add-edit-tarjeta/add-edit-tarjeta.component';
 import { AddEditTransaccionComponent } from './components/add-edit-transaccion/add-edit-transaccion.component';
 import { AddEditBeneficioComponent } from './components/add-edit-beneficio/add-edit-beneficio.component';
+import { CustomSnackbarComponent } from './components/custom-snackbar/custom-snackbar.component';
+import { CustomSnackbarService } from './components/custom-snackbar/service/custom-snackbar.service';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { AddEditBeneficioComponent } from './components/add-edit-beneficio/add-e
     AddEditTarjetaComponent,
     AddEditTransaccionComponent,
     AddEditBeneficioComponent,
+    CustomSnackbarComponent,
   ],
   imports: [CommonModule, MaterialModule, ReactiveFormsModule, RouterModule],
   exports: [
@@ -38,6 +41,6 @@ import { AddEditBeneficioComponent } from './components/add-edit-beneficio/add-e
     AddEditTransaccionComponent,
     AddEditBeneficioComponent,
   ],
-  providers: [CustomDialogService],
+  providers: [CustomDialogService, CustomSnackbarService],
 })
 export class SharedModule {}

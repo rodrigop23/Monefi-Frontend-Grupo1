@@ -7,13 +7,18 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { CustomSnackbarService } from '../../components/custom-snackbar/service/custom-snackbar.service';
 
 @Injectable({ providedIn: 'root' })
 export class FormValidator {
   public correoPatron: string =
     '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$';
 
-  constructor(private router: Router, private snackbar: MatSnackBar) {}
+  constructor(
+    private router: Router,
+    private snackbar: MatSnackBar,
+    private _snackbarService: CustomSnackbarService
+  ) {}
 
   validarCampoFormulario(form: FormGroup, field: string): boolean | null {
     return form.controls[field].errors && form.controls[field].touched;
@@ -52,13 +57,13 @@ export class FormValidator {
         case 'maxlength':
           return `Este campo debe tener un máximo ${errors['maxlength'].requiredLength} caracteres`;
         case 'pattern':
-          return 'El correo ingresado no es válido';
+          return 'Correo electrónico inválido';
         case 'notEqual':
           return 'Las contraseñas no coinciden';
         case 'duplicate':
-          return 'El correo ingresado ya se encuentra registrado';
+          return 'El correo ya se encuentra registrado';
         case 'notFound':
-          return 'El correo ingresado no se encuentra registrado';
+          return 'El correo no se encuentra registrado';
         case 'invalidPassword':
           return 'La contraseña ingresada es incorrecta';
         default:
@@ -70,9 +75,7 @@ export class FormValidator {
   }
 
   handleResponse(form: FormGroup, mensaje: string, path: string) {
-    this.snackbar.open(mensaje, '', {
-      panelClass: 'success-snackbar',
-    });
+    this._snackbarService.loadSnackBar('check_circle', mensaje, 'success');
 
     setTimeout(() => {
       form.reset();
@@ -82,9 +85,7 @@ export class FormValidator {
   }
 
   handleError(mensaje: string, path?: string) {
-    this.snackbar.open(mensaje, '', {
-      panelClass: 'error-snackbar',
-    });
+    this._snackbarService.loadSnackBar('error', mensaje, 'error');
 
     if (path) {
       this.router.navigateByUrl(path);
