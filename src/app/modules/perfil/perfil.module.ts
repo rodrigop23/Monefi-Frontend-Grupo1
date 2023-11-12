@@ -9,6 +9,7 @@ import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.
 import { CambiarContrasenaComponent } from './components/cambiar-contrasena/cambiar-contrasena.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NotificacionesComponent } from './components/notificaciones/notificaciones.component';
+import { AccesibilidadComponent } from './components/accesibilidad/accesibilidad.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { NotificacionesComponent } from './components/notificaciones/notificacio
     EditarPerfilComponent,
     CambiarContrasenaComponent,
     NotificacionesComponent,
+    AccesibilidadComponent,
   ],
   imports: [
     CommonModule,

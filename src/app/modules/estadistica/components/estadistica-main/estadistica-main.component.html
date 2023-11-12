@@ -24,7 +24,7 @@
         <div class="gasto-title">Gasto Acumulado</div>
         <div class="gasto-monto-container">
           <div class="gasto-monto">S/. {{ gastoAcumulado }}</div>
-          <div class="porcentaje-container">
+          <div class="porcentaje-container" *ngIf="limiteTotal">
             <ng-container *ngIf="limiteTotal > gastoAcumulado; else mayor">
               <mat-icon class="icon-green">arrow_drop_down</mat-icon>
             </ng-container>

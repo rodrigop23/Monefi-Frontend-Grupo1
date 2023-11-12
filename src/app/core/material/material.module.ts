@@ -23,6 +23,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import localPE from '@angular/common/locales/es-PE';
 import { registerLocaleData } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 registerLocaleData(localPE);
 
@@ -42,6 +43,7 @@ registerLocaleData(localPE);
     MatProgressSpinnerModule,
     MatDatepickerModule,
     MatExpansionModule,
+    MatSlideToggleModule,
   ],
   providers: [
     {

@@ -4,6 +4,7 @@ import { PerfilMainComponent } from './components/perfil-main/perfil-main.compon
 import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.component';
 import { CambiarContrasenaComponent } from './components/cambiar-contrasena/cambiar-contrasena.component';
 import { NotificacionesComponent } from './components/notificaciones/notificaciones.component';
+import { AccesibilidadComponent } from './components/accesibilidad/accesibilidad.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'notificaciones',
     component: NotificacionesComponent,
+  },
+  {
+    path: 'accesibilidad',
+    component: AccesibilidadComponent,
   },
 ];
 

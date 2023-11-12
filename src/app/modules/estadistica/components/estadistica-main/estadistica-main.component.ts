@@ -65,8 +65,6 @@ export class EstadisticaMainComponent implements OnInit {
       .obtenerEstadisticasMensuales(this.idUsuario, this.mesActual.value!)
       .subscribe({
         next: (resp) => {
-          console.log(resp);
-
           this.pieChartData = resp.pieChartData;
 
           this.limiteTotal = resp.limiteTotal;

@@ -123,16 +123,12 @@ $md-mcgpalette0: (
 //     density: 0,
 //   )
 // );
-$Monefi-Frontend-Grupo1-theme: mat.define-light-theme(
+$monefi-light-theme: mat.define-light-theme(
   (
     color: (
       primary: mat.define-palette($md-mcgpalette0, 500),
       accent: mat.define-palette($md-mcgpalette0, 200),
     ),
-    typography:
-      mat.define-typography-config(
-        $font-family: "Poppins",
-      ),
     density: 0,
   )
 );
@@ -140,4 +136,5 @@ $Monefi-Frontend-Grupo1-theme: mat.define-light-theme(
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($Monefi-Frontend-Grupo1-theme);
+
+@include mat.all-component-themes($monefi-light-theme);
