@@ -104,6 +104,10 @@ body {
   font-size: 14px;
 }
 
+.mat-mdc-form-field-error {
+  font-size: 14px !important;
+}
+
 .sub-title-form {
   margin-bottom: 12px;
   color: #020614;

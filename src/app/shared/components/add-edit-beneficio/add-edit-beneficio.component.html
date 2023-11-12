@@ -41,16 +41,26 @@
         <mat-error>Seleccione una entidad</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="full-width">
+      <mat-form-field
+        class="full-width"
+        [ngClass]="{
+          marginBottom: validarCamposFormulario('var_nombre')
+        }"
+      >
         <mat-label>Nombre del Beneficio</mat-label>
         <input matInput type="text" formControlName="var_nombre" />
-        <mat-error>Ingrese un nombre</mat-error>
+        <mat-error>Ingrese el nombre del beneficio</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="full-width">
+      <mat-form-field
+        class="full-width"
+        [ngClass]="{
+          marginBottom: validarCamposFormulario('num_valor')
+        }"
+      >
         <mat-label>Valor de milla por unidad de consumo</mat-label>
         <input matInput type="number" formControlName="num_valor" />
-        <mat-error>Ingrese un nombre</mat-error>
+        <mat-error>Ingrese las millas</mat-error>
       </mat-form-field>
     </div>
   </form>

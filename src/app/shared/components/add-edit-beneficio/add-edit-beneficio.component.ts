@@ -91,6 +91,10 @@ export class AddEditBeneficioComponent implements OnInit {
     });
   }
 
+  validarCamposFormulario(field: string) {
+    return this.formValidator.validarCampoFormulario(this.beneficioForm, field);
+  }
+
   onSubmit() {
     if (this.beneficioForm.invalid) {
       return this.beneficioForm.markAllAsTouched();

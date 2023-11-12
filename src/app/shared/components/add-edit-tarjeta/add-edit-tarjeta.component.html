@@ -36,7 +36,14 @@
     <ng-container *ngIf="tarjetaForm.controls['var_tipo'].value === 'Crédito'">
       <div class="sub-title-form">Datos de Facturación</div>
 
-      <div class="input-two-container">
+      <div
+        class="input-two-container"
+        [ngClass]="{
+          marginBottom:
+            validarCamposFormulario('dte_inicio_facturacion') ||
+            validarCamposFormulario('dte_fin_facturacion')
+        }"
+      >
         <mat-form-field class="full-width">
           <mat-label>Fecha inicio</mat-label>
           <input
@@ -49,7 +56,7 @@
             [for]="pickerOne"
           ></mat-datepicker-toggle>
           <mat-datepicker #pickerOne></mat-datepicker>
-          <mat-error>Seleccione una fecha</mat-error>
+          <mat-error>Campo requerido</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width">
@@ -64,11 +71,16 @@
             [for]="pickerTwo"
           ></mat-datepicker-toggle>
           <mat-datepicker #pickerTwo></mat-datepicker>
-          <mat-error>Seleccione una fecha</mat-error>
+          <mat-error>Campo requerido</mat-error>
         </mat-form-field>
       </div>
 
-      <mat-form-field class="full-width">
+      <mat-form-field
+        class="full-width"
+        [ngClass]="{
+          marginBottom: validarCamposFormulario('dte_dia_pago')
+        }"
+      >
         <mat-label>Fecha de pago</mat-label>
         <input
           matInput
@@ -80,23 +92,28 @@
           [for]="pickerThree"
         ></mat-datepicker-toggle>
         <mat-datepicker #pickerThree></mat-datepicker>
-        <mat-error>Seleccione una fecha</mat-error>
+        <mat-error>Seleccione una fecha de pago</mat-error>
       </mat-form-field>
     </ng-container>
 
     <ng-container>
       <div class="sub-title-form">Datos de la Tarjeta</div>
 
-      <mat-form-field class="full-width">
+      <mat-form-field
+        class="full-width"
+        [ngClass]="{
+          marginBottom: validarCamposFormulario('var_nombre')
+        }"
+      >
         <mat-label>Nombre de la Tarjeta</mat-label>
         <input matInput type="text" formControlName="var_nombre" />
-        <mat-error>Ingrese un nombre</mat-error>
+        <mat-error>Ingrese un nombre para la tarjeta</mat-error>
       </mat-form-field>
 
       <div
         class="input-two-container"
         [ngClass]="{
-          marginBottomExtra:
+          marginBottom:
             validarCamposFormulario('FK_tarjeta_entidad') ||
             validarCamposFormulario('FK_tarjeta_moneda')
         }"
@@ -111,7 +128,7 @@
               {{ entidad.var_nombre }}
             </mat-option>
           </mat-select>
-          <mat-error>Seleccione una entidad</mat-error>
+          <mat-error>Campo requerido</mat-error>
         </mat-form-field>
 
         <mat-form-field class="full-width">
@@ -124,7 +141,7 @@
               {{ entidad.var_nombre }}
             </mat-option>
           </mat-select>
-          <mat-error>Seleccione una moneda</mat-error>
+          <mat-error>Campo requerido</mat-error>
         </mat-form-field>
       </div>
     </ng-container>
