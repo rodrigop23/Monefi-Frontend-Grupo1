@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Transaccion } from '../../interfaces/Transaccion.interface';
 import { TransaccionService } from 'src/app/core/services/http/transaccion/transaccion.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomDialogService } from '../custom-dialog/service/custom-dialog.service';
 import {
   CustomSnackbarService,

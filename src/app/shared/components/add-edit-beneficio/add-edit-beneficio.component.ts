@@ -8,7 +8,6 @@ import { DropdownService } from 'src/app/core/services/http/dropdown/dropdown.se
 import { TarjetaService } from 'src/app/core/services/http/tarjeta/tarjeta.service';
 import { BeneficioService } from 'src/app/core/services/http/beneficio/beneficio.service';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormValidator } from '../../util/validators/formValidator.service';
 import {
   CustomSnackbarService,
@@ -45,7 +44,6 @@ export class AddEditBeneficioComponent implements OnInit {
     private tarjetaService: TarjetaService,
     private beneficioService: BeneficioService,
     private router: Router,
-    private snackbar: MatSnackBar,
     private formValidator: FormValidator,
     private _snackbarService: CustomSnackbarService
   ) {

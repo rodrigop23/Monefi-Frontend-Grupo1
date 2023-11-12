@@ -8,7 +8,6 @@ import { Dropdown } from '../../interfaces/Dropdown.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { DropdownService } from 'src/app/core/services/http/dropdown/dropdown.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import {
   CustomSnackbarService,
