@@ -3,6 +3,10 @@ import { Transaccion } from '../../interfaces/Transaccion.interface';
 import { TransaccionService } from 'src/app/core/services/http/transaccion/transaccion.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomDialogService } from '../custom-dialog/service/custom-dialog.service';
+import {
+  CustomSnackbarService,
+  TipoSnackbar,
+} from '../custom-snackbar/service/custom-snackbar.service';
 
 @Component({
   selector: 'shared-list-item',
@@ -14,9 +18,13 @@ export class ListItemComponent {
 
   constructor(
     private transaccionService: TransaccionService,
-    private snackbar: MatSnackBar,
+    private _snackbarService: CustomSnackbarService,
     private dialogService: CustomDialogService
   ) {}
+
+  abrirSnackbar(icono: string, mensaje: string, tipo: TipoSnackbar) {
+    this._snackbarService.loadSnackBar(icono, mensaje, tipo);
+  }
 
   abrirDialogoEliminar() {
     this.dialogService
@@ -39,9 +47,11 @@ export class ListItemComponent {
       .eliminarTransaccion(this.transaccion.PK_transaccion)
       .subscribe({
         next: () => {
-          this.snackbar.open('Transacción eliminada correctamente', '', {
-            panelClass: 'success-snackbar',
-          });
+          this.abrirSnackbar(
+            'check_circle',
+            'Transacción eliminada correctamente',
+            'success'
+          );
         },
       });
   }

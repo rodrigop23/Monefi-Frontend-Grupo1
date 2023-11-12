@@ -2,8 +2,11 @@ import { Component, Input } from '@angular/core';
 import { VisualizarTarjeta } from '../../interfaces/Tarjeta.interface';
 import { TarjetaService } from 'src/app/core/services/http/tarjeta/tarjeta.service';
 import { CustomDialogService } from '../custom-dialog/service/custom-dialog.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { BeneficioService } from 'src/app/core/services/http/beneficio/beneficio.service';
+import {
+  CustomSnackbarService,
+  TipoSnackbar,
+} from '../custom-snackbar/service/custom-snackbar.service';
 
 @Component({
   selector: 'shared-custom-tarjeta',
@@ -17,9 +20,13 @@ export class CustomTarjetaComponent {
   constructor(
     private tarjetaService: TarjetaService,
     private dialogService: CustomDialogService,
-    private snackbar: MatSnackBar,
-    private beneficioService: BeneficioService
+    private beneficioService: BeneficioService,
+    private _snackbarService: CustomSnackbarService
   ) {}
+
+  abrirSnackbar(icono: string, mensaje: string, tipo: TipoSnackbar) {
+    this._snackbarService.loadSnackBar(icono, mensaje, tipo);
+  }
 
   abrirDialogoEliminarTarjeta() {
     this.dialogService
@@ -40,9 +47,11 @@ export class CustomTarjetaComponent {
   eliminarTarjeta() {
     this.tarjetaService.eliminarTarjeta(this.tarjeta.PK_tarjeta).subscribe({
       next: () => {
-        this.snackbar.open('Tarjeta eliminada correctamente', '', {
-          panelClass: 'success-snackbar',
-        });
+        this.abrirSnackbar(
+          'check_circle',
+          'Tarjeta eliminada correctamente',
+          'success'
+        );
       },
     });
   }
@@ -68,9 +77,11 @@ export class CustomTarjetaComponent {
       .eliminarBeneficio(this.tarjeta.FK_beneficio!)
       .subscribe({
         next: () => {
-          this.snackbar.open('Beneficio eliminado correctamente', '', {
-            panelClass: 'success-snackbar',
-          });
+          this.abrirSnackbar(
+            'check_circle',
+            'Beneficio eliminado correctamente',
+            'success'
+          );
         },
       });
   }

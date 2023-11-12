@@ -10,6 +10,10 @@ import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { DropdownService } from 'src/app/core/services/http/dropdown/dropdown.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import {
+  CustomSnackbarService,
+  TipoSnackbar,
+} from '../custom-snackbar/service/custom-snackbar.service';
 
 @Component({
   selector: 'app-add-edit-tarjeta',
@@ -74,8 +78,8 @@ export class AddEditTarjetaComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private dropdownService: DropdownService,
-    private snackbar: MatSnackBar,
-    private authService: AuthService
+    private authService: AuthService,
+    private _snackbarService: CustomSnackbarService
   ) {
     this.tipoTarjetas = TIPO_TARJETAS;
 
@@ -118,6 +122,10 @@ export class AddEditTarjetaComponent implements OnInit {
     return this.formValidator.validarCampoFormulario(this.tarjetaForm, field);
   }
 
+  abrirSnackbar(icono: string, mensaje: string, tipo: TipoSnackbar) {
+    this._snackbarService.loadSnackBar(icono, mensaje, tipo);
+  }
+
   onSubmit() {
     if (this.tarjetaForm.invalid) {
       return this.tarjetaForm.markAllAsTouched();
@@ -125,10 +133,11 @@ export class AddEditTarjetaComponent implements OnInit {
 
     if (this.tipoAccion === 'editar') {
       if (!this.tarjetaForm.dirty) {
-        this.snackbar.open('No se detectaron cambios', '', {
-          panelClass: 'error-snackbar',
-        });
-        return;
+        return this.abrirSnackbar(
+          'warning',
+          'No se detectaron cambios',
+          'warning'
+        );
       }
 
       this.tarjetaService.actualizarTarjeta(this.tarjetaForm.value).subscribe({

@@ -10,6 +10,10 @@ import { BeneficioService } from 'src/app/core/services/http/beneficio/beneficio
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormValidator } from '../../util/validators/formValidator.service';
+import {
+  CustomSnackbarService,
+  TipoSnackbar,
+} from '../custom-snackbar/service/custom-snackbar.service';
 
 @Component({
   selector: 'app-add-edit-beneficio',
@@ -42,7 +46,8 @@ export class AddEditBeneficioComponent implements OnInit {
     private beneficioService: BeneficioService,
     private router: Router,
     private snackbar: MatSnackBar,
-    private formValidator: FormValidator
+    private formValidator: FormValidator,
+    private _snackbarService: CustomSnackbarService
   ) {
     this.tipoTarjetas = TIPO_TARJETAS;
   }
@@ -95,6 +100,10 @@ export class AddEditBeneficioComponent implements OnInit {
     return this.formValidator.validarCampoFormulario(this.beneficioForm, field);
   }
 
+  abrirSnackbar(icono: string, mensaje: string, tipo: TipoSnackbar) {
+    this._snackbarService.loadSnackBar(icono, mensaje, tipo);
+  }
+
   onSubmit() {
     if (this.beneficioForm.invalid) {
       return this.beneficioForm.markAllAsTouched();
@@ -102,10 +111,11 @@ export class AddEditBeneficioComponent implements OnInit {
 
     if (this.tipoAccion === 'editar') {
       if (!this.beneficioForm.dirty) {
-        this.snackbar.open('No se detectaron cambios', '', {
-          panelClass: 'error-snackbar',
-        });
-        return;
+        return this.abrirSnackbar(
+          'warning',
+          'No se detectaron cambios',
+          'warning'
+        );
       }
 
       this.beneficioService

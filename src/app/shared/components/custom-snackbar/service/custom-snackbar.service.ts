@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomSnackbarComponent } from '../custom-snackbar.component';
 
-type TipoSnackbar = 'error' | 'success' | 'warning' | 'info';
+export type TipoSnackbar = 'error' | 'success' | 'warning' | 'info';
 
 @Injectable({
   providedIn: 'root',

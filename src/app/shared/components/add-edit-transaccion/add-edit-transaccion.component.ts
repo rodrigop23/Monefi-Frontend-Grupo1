@@ -10,6 +10,10 @@ import { TransaccionService } from 'src/app/core/services/http/transaccion/trans
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  CustomSnackbarService,
+  TipoSnackbar,
+} from '../custom-snackbar/service/custom-snackbar.service';
 
 @Component({
   selector: 'app-add-edit-transaccion',
@@ -47,7 +51,7 @@ export class AddEditTransaccionComponent implements OnInit {
     private dropdownService: DropdownService,
     private transaccionService: TransaccionService,
     private authService: AuthService,
-    private snackbar: MatSnackBar
+    private _snackbarService: CustomSnackbarService
   ) {
     this.tipoTransacciones = TIPO_TRANSACCION;
 
@@ -96,6 +100,10 @@ export class AddEditTransaccionComponent implements OnInit {
     );
   }
 
+  abrirSnackbar(icono: string, mensaje: string, tipo: TipoSnackbar) {
+    this._snackbarService.loadSnackBar(icono, mensaje, tipo);
+  }
+
   onSubmit() {
     if (this.transaccionForm.invalid) {
       return this.transaccionForm.markAllAsTouched();
@@ -103,10 +111,11 @@ export class AddEditTransaccionComponent implements OnInit {
 
     if (this.tipoAccion === 'editar') {
       if (!this.transaccionForm.dirty) {
-        this.snackbar.open('No se detectaron cambios', '', {
-          panelClass: 'error-snackbar',
-        });
-        return;
+        return this.abrirSnackbar(
+          'warning',
+          'No se detectaron cambios',
+          'warning'
+        );
       }
 
       this.transaccionService
