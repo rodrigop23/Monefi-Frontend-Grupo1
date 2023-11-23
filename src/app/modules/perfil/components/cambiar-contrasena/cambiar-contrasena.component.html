@@ -1,3 +1,5 @@
+<shared-loading-screen *ngIf="loading"></shared-loading-screen>
+
 <div class="editar-contrasena-main-container">
   <app-header
     titulo="Cambiar Contraseña"
@@ -6,10 +8,17 @@
   ></app-header>
 
   <div class="form-container">
-    <form>
-      <mat-form-field class="full-width">
+    <form [formGroup]="contrasenaForm">
+      <mat-form-field
+        class="full-width"
+        [ngClass]="{ marginBottom: validarCampoFormulario('var_contrasena') }"
+      >
         <mat-label>Contraseña Actual</mat-label>
-        <input matInput [type]="ocultarActual ? 'password' : 'text'" />
+        <input
+          matInput
+          formControlName="var_contrasena"
+          [type]="ocultarActual ? 'password' : 'text'"
+        />
         <mat-icon
           matSuffix
           color="primary"
@@ -17,12 +26,23 @@
         >
           {{ ocultarActual ? "visibility_off" : "visibility" }}
         </mat-icon>
-        <mat-error> </mat-error>
+        <mat-error>{{
+          obtenerErrorCampoFormulario("var_contrasena")
+        }}</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="full-width">
+      <mat-form-field
+        class="full-width"
+        [ngClass]="{
+          marginBottom: validarCampoFormulario('var_contrasena_nueva')
+        }"
+      >
         <mat-label>Nueva Contraseña</mat-label>
-        <input matInput [type]="ocultarNueva ? 'password' : 'text'" />
+        <input
+          matInput
+          formControlName="var_contrasena_nueva"
+          [type]="ocultarNueva ? 'password' : 'text'"
+        />
         <mat-icon
           matSuffix
           color="primary"
@@ -30,12 +50,18 @@
         >
           {{ ocultarNueva ? "visibility_off" : "visibility" }}
         </mat-icon>
-        <mat-error> </mat-error>
+        <mat-error>{{
+          obtenerErrorCampoFormulario("var_contrasena_nueva")
+        }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="full-width">
         <mat-label>Confirmar Nueva Contraseña</mat-label>
-        <input matInput [type]="ocultarNueva ? 'password' : 'text'" />
+        <input
+          matInput
+          formControlName="var_confirmar_nueva"
+          [type]="ocultarNueva ? 'password' : 'text'"
+        />
         <mat-icon
           matSuffix
           color="primary"
@@ -43,7 +69,9 @@
         >
           {{ ocultarNueva ? "visibility_off" : "visibility" }}
         </mat-icon>
-        <mat-error> </mat-error>
+        <mat-error>{{
+          obtenerErrorCampoFormulario("var_confirmar_nueva")
+        }}</mat-error>
       </mat-form-field>
     </form>
 

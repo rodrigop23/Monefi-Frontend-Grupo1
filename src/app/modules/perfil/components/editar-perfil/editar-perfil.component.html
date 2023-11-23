@@ -1,33 +1,52 @@
-<!-- 
-  TODO: Se podría agregar para eliminar/suspender cuenta y posiblemente exportar datos de la cuenta.
--->
+<!-- TODO: Falta diseño -->
+
+<shared-loading-screen *ngIf="loading"></shared-loading-screen>
 
 <div class="editar-perfil-main-container">
   <app-header titulo="Editar Perfil" [back]="true" path="/perfil"></app-header>
 
   <div class="form-container">
-    <form>
-      <mat-form-field class="full-width">
+    <form [formGroup]="perfilForm">
+      <!-- <div>
+        <div class="sub-title-form">Datos actuales</div> -->
+      <mat-form-field
+        class="full-width"
+        [ngClass]="{ marginBottom: validarCampoFormulario('var_nombres') }"
+      >
         <mat-label>Nombres</mat-label>
-        <input matInput />
-        <mat-error></mat-error>
+        <input matInput formControlName="var_nombres" />
+        <mat-error>Ingrese un nombre válido</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="full-width">
+      <mat-form-field
+        class="full-width"
+        [ngClass]="{ marginBottom: validarCampoFormulario('var_apellidos') }"
+      >
         <mat-label>Apellidos</mat-label>
-        <input matInput />
-        <mat-error></mat-error>
+        <input matInput formControlName="var_apellidos" />
+        <mat-error>Ingrese un apellido válido</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="full-width">
+      <mat-form-field
+        class="full-width"
+        [ngClass]="{ marginBottom: validarCampoFormulario('var_correo') }"
+      >
         <mat-label>Correo Electrónico</mat-label>
-        <input matInput />
-        <mat-error></mat-error>
+        <input matInput formControlName="var_correo" />
+        <mat-error>{{ obtenerErrorCampoFormulario("var_correo") }}</mat-error>
       </mat-form-field>
+      <!-- </div> -->
+
+      <!-- <div> -->
+      <!-- <div class="sub-title-form">Confirmar cambios con contraseña</div> -->
 
       <mat-form-field class="full-width">
         <mat-label>Contraseña Actual</mat-label>
-        <input matInput [type]="ocultarPassword ? 'password' : 'text'" />
+        <input
+          matInput
+          formControlName="var_contrasena"
+          [type]="ocultarPassword ? 'password' : 'text'"
+        />
         <mat-icon
           matSuffix
           color="primary"
@@ -35,8 +54,11 @@
         >
           {{ ocultarPassword ? "visibility_off" : "visibility" }}
         </mat-icon>
-        <mat-error> </mat-error>
+        <mat-error
+          >{{ obtenerErrorCampoFormulario("var_contrasena") }}
+        </mat-error>
       </mat-form-field>
+      <!-- </div> -->
     </form>
 
     <shared-default-button
