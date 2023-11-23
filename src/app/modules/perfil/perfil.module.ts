@@ -9,7 +9,7 @@ import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.
 import { CambiarContrasenaComponent } from './components/cambiar-contrasena/cambiar-contrasena.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NotificacionesComponent } from './components/notificaciones/notificaciones.component';
-import { AccesibilidadComponent } from './components/accesibilidad/accesibilidad.component';
+import { EstadoCuentaComponent } from './components/estado-cuenta/estado-cuenta.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { AccesibilidadComponent } from './components/accesibilidad/accesibilidad
     EditarPerfilComponent,
     CambiarContrasenaComponent,
     NotificacionesComponent,
-    AccesibilidadComponent,
+    EstadoCuentaComponent,
   ],
   imports: [
     CommonModule,

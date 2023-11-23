@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { UsuarioService } from 'src/app/core/services/http/usuario/usuario.service';
 import { CustomDialogService } from 'src/app/shared/components/custom-dialog/service/custom-dialog.service';
 import {
   CustomSnackbarService,
@@ -12,17 +13,28 @@ import {
   templateUrl: './perfil-main.component.html',
   styleUrls: ['./perfil-main.component.css'],
 })
-export class PerfilMainComponent {
-  nombre: string = '';
+export class PerfilMainComponent implements OnInit {
   loading: boolean = false;
+
+  userName: string = '';
 
   constructor(
     private authService: AuthService,
     private dialogService: CustomDialogService,
-    private snackbar: MatSnackBar,
-    private _snackbarService: CustomSnackbarService
-  ) {
-    this.nombre = this.authService.usuario.var_nombre!;
+    private _snackbarService: CustomSnackbarService,
+    private usuarioService: UsuarioService
+  ) {}
+
+  ngOnInit(): void {
+    this.obtenerDataUsuario();
+  }
+
+  obtenerDataUsuario() {
+    this.usuarioService.obtenerDatosPerfil().subscribe({
+      next: (res) => {
+        this.userName = res.var_nombre_completo as string;
+      },
+    });
   }
 
   abrirSnackbar(icono: string, mensaje: string, tipo: TipoSnackbar) {
