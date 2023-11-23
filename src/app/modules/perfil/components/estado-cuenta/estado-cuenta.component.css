@@ -1,0 +1,91 @@
+.estado-main-container {
+  min-height: var(--full-height);
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px 24px 16px;
+  gap: 32px;
+}
+
+.content-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.gap-32 {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.space-between-items {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.deshabilitar-title {
+  color: #0c0e41;
+  font-family: inherit;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 0.5px;
+}
+
+.mat-mdc-slide-toggle {
+  width: 40px;
+}
+
+.help-container {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  justify-content: center;
+  align-items: center;
+}
+
+.help-message {
+  color: #82909d;
+  text-align: center;
+  font-family: inherit;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.help-message-two {
+  color: #82909d;
+  text-align: center;
+  font-family: inherit;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.mat-slide-toggle-bar {
+  margin-right: 0;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.delete-button span {
+  color: #ff552f;
+  text-align: center;
+  font-family: inherit;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  text-decoration-line: underline;
+  letter-spacing: 0.5px;
+}

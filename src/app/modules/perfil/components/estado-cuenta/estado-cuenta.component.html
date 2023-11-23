@@ -1,0 +1,37 @@
+<shared-loading-screen *ngIf="loading"></shared-loading-screen>
+
+<div class="estado-main-container">
+  <app-header
+    titulo="Estado de Cuenta"
+    [back]="true"
+    path="/perfil"
+  ></app-header>
+
+  <div class="content-container">
+    <div class="gap-32">
+      <div class="space-between-items">
+        <div class="deshabilitar-title">Deshabilitar cuenta</div>
+        <mat-slide-toggle [formControl]="isChecked"></mat-slide-toggle>
+      </div>
+
+      <mat-divider></mat-divider>
+      <div class="help-container">
+        <div class="help-message">
+          Asegúrate de recordar tu contraseña, ya que la necesitarás para volver
+          a iniciar sesión.
+        </div>
+        <div class="help-message-two">{{ correoUsuario }}</div>
+      </div>
+    </div>
+    <div class="button-container">
+      <shared-default-button
+        text="Guardar Cambios"
+        (onClick)="guardarCambios()"
+      ></shared-default-button>
+
+      <button mat-flat-button class="delete-button" (click)="eliminarCuenta()">
+        <span>Eliminar Cuenta</span>
+      </button>
+    </div>
+  </div>
+</div>
