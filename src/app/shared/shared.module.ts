@@ -15,6 +15,7 @@ import { AddEditTransaccionComponent } from './components/add-edit-transaccion/a
 import { AddEditBeneficioComponent } from './components/add-edit-beneficio/add-edit-beneficio.component';
 import { CustomSnackbarComponent } from './components/custom-snackbar/custom-snackbar.component';
 import { CustomSnackbarService } from './components/custom-snackbar/service/custom-snackbar.service';
+import { ListAddItemComponent } from './components/list-add-item/list-add-item.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CustomSnackbarService } from './components/custom-snackbar/service/cust
     AddEditTransaccionComponent,
     AddEditBeneficioComponent,
     CustomSnackbarComponent,
+    ListAddItemComponent,
   ],
   imports: [CommonModule, MaterialModule, ReactiveFormsModule, RouterModule],
   exports: [
@@ -40,6 +42,7 @@ import { CustomSnackbarService } from './components/custom-snackbar/service/cust
     AddEditTarjetaComponent,
     AddEditTransaccionComponent,
     AddEditBeneficioComponent,
+    ListAddItemComponent,
   ],
   providers: [CustomDialogService, CustomSnackbarService],
 })

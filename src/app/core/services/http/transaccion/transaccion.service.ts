@@ -70,4 +70,28 @@ export class TransaccionService {
       .delete<BasicResponse>(url)
       .pipe(tap(() => this.observerService.refresh$.next()));
   }
+
+  obtenerTransaccionesRecurrentes() {
+    const url = `${this.API_URL}/tipo/recurrente`;
+
+    const headers = new HttpHeaders().set(
+      'jwt-token',
+      localStorage.getItem('token') || ''
+    );
+
+    return this.http.get<Transaccion[]>(url, { headers });
+  }
+
+  registrarTransaccionRecurrente(idTransaccion: number) {
+    const url = `${this.API_URL}/registrar/recurrente`;
+
+    const headers = new HttpHeaders().set(
+      'jwt-token',
+      localStorage.getItem('token') || ''
+    );
+
+    return this.http
+      .post<BasicResponse>(url, { idTransaccion }, { headers })
+      .pipe(tap(() => this.observerService.refresh$.next()));
+  }
 }

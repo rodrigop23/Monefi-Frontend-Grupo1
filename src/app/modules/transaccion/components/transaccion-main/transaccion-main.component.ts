@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/internal/Subscription';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { TransaccionService } from 'src/app/core/services/http/transaccion/transaccion.service';
 import { ObserverService } from 'src/app/core/services/observer/observer.service';
@@ -15,6 +15,8 @@ export class TransaccionMainComponent implements OnInit, OnDestroy {
 
   dataTransacciones: Transaccion[] = [];
 
+  dataRecurrentes: Transaccion[] = [];
+
   suscripcion: Subscription = new Subscription();
 
   constructor(
@@ -28,9 +30,13 @@ export class TransaccionMainComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.obtenerHistorialTransacciones();
 
+    this.obtenerTransaccionesRecurrentes();
+
     this.suscripcion = this.observerService.refresh$.subscribe({
       next: () => {
         this.obtenerHistorialTransacciones();
+
+        this.obtenerTransaccionesRecurrentes();
       },
     });
   }
@@ -47,5 +53,14 @@ export class TransaccionMainComponent implements OnInit, OnDestroy {
           this.dataTransacciones = resp;
         },
       });
+  }
+
+  obtenerTransaccionesRecurrentes() {
+    this.transaccionService.obtenerTransaccionesRecurrentes().subscribe({
+      next: (resp) => {
+        console.log(resp);
+        this.dataRecurrentes = resp;
+      },
+    });
   }
 }

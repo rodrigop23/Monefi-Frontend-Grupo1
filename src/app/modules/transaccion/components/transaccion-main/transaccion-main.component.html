@@ -8,8 +8,12 @@
       routerLink="/transaccion/registrar"
     ></shared-default-button>
 
-    <mat-accordion>
-      <mat-expansion-panel class="accordion-panel">
+    <mat-accordion [multi]="true">
+      <!-- Transacciones Recurrentes -->
+      <mat-expansion-panel
+        class="accordion-panel"
+        [expanded]="dataRecurrentes.length > 0"
+      >
         <mat-expansion-panel-header
           [collapsedHeight]="'56px'"
           [expandedHeight]="'56px'"
@@ -18,9 +22,16 @@
             Recurrentes
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
+        <div class="transaccion-list">
+          <ng-container *ngFor="let transaccion of dataRecurrentes">
+            <shared-list-add-item
+              [transaccion]="transaccion"
+            ></shared-list-add-item>
+          </ng-container>
+        </div>
       </mat-expansion-panel>
 
+      <!-- Transacciones Generales -->
       <mat-expansion-panel
         class="accordion-panel"
         [expanded]="dataTransacciones.length > 0"

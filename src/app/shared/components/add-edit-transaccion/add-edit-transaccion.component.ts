@@ -39,6 +39,7 @@ export class AddEditTransaccionComponent implements OnInit {
     FK_transaccion_categoria: ['', [Validators.required]],
     FK_transaccion_moneda: ['', [Validators.required]],
     FK_transaccion_tarjeta: ['', [Validators.required]],
+    bool_recurrente: [false],
   });
 
   constructor(
@@ -48,7 +49,6 @@ export class AddEditTransaccionComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private dropdownService: DropdownService,
     private transaccionService: TransaccionService,
-    private authService: AuthService,
     private _snackbarService: CustomSnackbarService
   ) {
     this.tipoTransacciones = TIPO_TRANSACCION;
