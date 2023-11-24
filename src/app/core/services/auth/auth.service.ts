@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
@@ -20,15 +20,16 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
+  private API_URL = environment.API_URL + '/usuario';
+
   private _usuario: Usuario | null = null;
+
+  private http = inject(HttpClient);
+  private router = inject(Router);
 
   get usuario() {
     return { ...this._usuario };
   }
-
-  constructor(private http: HttpClient, private router: Router) {}
-
-  API_URL = environment.API_URL + '/usuario';
 
   registrarUsuario(datosUsuario: RegistroUsuario): Observable<BasicResponse> {
     const url = `${this.API_URL}/registrar`;
@@ -46,8 +47,6 @@ export class AuthService {
 
           this._usuario = {
             PK_usuario: res.PK_usuario,
-            var_correo: res.var_correo,
-            var_nombre: res.var_nombre,
             expiresIn: res.exp,
           };
         }
@@ -72,15 +71,13 @@ export class AuthService {
 
           this._usuario = {
             PK_usuario: res.PK_usuario,
-            var_correo: res.var_correo,
-            var_nombre: res.var_nombre,
             expiresIn: res.exp,
           };
         }
 
         return res.ok;
       }),
-      catchError((err) => {
+      catchError(() => {
         localStorage.removeItem('token');
 
         return of(false);
@@ -93,7 +90,7 @@ export class AuthService {
   }
 
   cerrarSesion() {
-    localStorage.removeItem('token');
+    localStorage.clear();
     this._usuario = null;
     this.router.navigateByUrl('/auth/login');
   }

@@ -1,5 +1,20 @@
 <div class="tarjeta-main-container">
-  <app-header titulo="Tus Tarjetas"></app-header>
+  <div class="tarjeta-header">
+    <div class="helper-header"></div>
+    <div class="tarjeta-header-title">Tus Tarjetas</div>
+    <div>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu" xPosition="before" yPosition="below">
+        <button mat-menu-item (click)="descargarExcelTransacciones()">
+          <mat-icon svgIcon="icon_excel"></mat-icon>
+          <span>Descargar Historial</span>
+        </button>
+      </mat-menu>
+    </div>
+  </div>
 
   <div class="contenido">
     <div *ngFor="let tarjeta of dataTarjetas">

@@ -23,7 +23,6 @@ export class AddEditTransaccionComponent implements OnInit {
   @Input() tipoAccion: string = 'registrar';
 
   loading: boolean = false;
-  idUsuario: number = 0;
 
   tipoTransacciones: Constant[] = [];
 
@@ -53,8 +52,6 @@ export class AddEditTransaccionComponent implements OnInit {
     private _snackbarService: CustomSnackbarService
   ) {
     this.tipoTransacciones = TIPO_TRANSACCION;
-
-    this.idUsuario = this.authService.usuario.PK_usuario!;
   }
 
   ngOnInit(): void {
@@ -62,7 +59,6 @@ export class AddEditTransaccionComponent implements OnInit {
 
     if (!this.router.url.includes('editar')) return;
 
-    // TODO: Verificar si ID de Tarjeta pertenece al usuario
     this.activatedRoute.params
       .pipe(
         switchMap(({ id }) => this.transaccionService.obtenerTransaccion(id))
@@ -81,15 +77,13 @@ export class AddEditTransaccionComponent implements OnInit {
   }
 
   obtenerDataDropdown() {
-    this.dropdownService
-      .obtenerDataDropdownTransaccion(this.idUsuario)
-      .subscribe({
-        next: (resp) => {
-          this.dataDropdownTarjetas = resp.tarjetas;
-          this.dataDropdownMonedas = resp.monedas;
-          this.dataDropdownCategorias = resp.categorias;
-        },
-      });
+    this.dropdownService.obtenerDataDropdownTransaccion().subscribe({
+      next: (resp) => {
+        this.dataDropdownTarjetas = resp.tarjetas;
+        this.dataDropdownMonedas = resp.monedas;
+        this.dataDropdownCategorias = resp.categorias;
+      },
+    });
   }
 
   validarCamposFormulario(field: string) {

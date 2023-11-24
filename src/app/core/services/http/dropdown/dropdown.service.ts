@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import {
@@ -21,15 +21,14 @@ export class DropdownService {
     return this.http.get<DropdownTarjetaResponse>(url);
   }
 
-  obtenerDataDropdownTransaccion(
-    idUsuario: number
-  ): Observable<DropdownTransaccionResponse> {
+  obtenerDataDropdownTransaccion(): Observable<DropdownTransaccionResponse> {
     const url = `${this.API_URL}/transaccion`;
 
-    return this.http.get<DropdownTransaccionResponse>(url, {
-      params: {
-        idUsuario,
-      },
-    });
+    const headers = new HttpHeaders().set(
+      'jwt-token',
+      localStorage.getItem('token') || ''
+    );
+
+    return this.http.get<DropdownTransaccionResponse>(url, { headers });
   }
 }

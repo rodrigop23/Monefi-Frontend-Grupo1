@@ -1,7 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { ExceljsService } from 'src/app/core/services/exceljs/exceljs.service';
 import { TarjetaService } from 'src/app/core/services/http/tarjeta/tarjeta.service';
 import { ObserverService } from 'src/app/core/services/observer/observer.service';
 import { VisualizarTarjeta } from 'src/app/shared/interfaces/Tarjeta.interface';
@@ -21,9 +24,19 @@ export class TarjetaMainComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthService,
     private tarjetaService: TarjetaService,
-    private observerService: ObserverService
+    private observerService: ObserverService,
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
+    private excelService: ExceljsService
   ) {
     this.idUsuario = this.authService.usuario.PK_usuario!;
+
+    this.matIconRegistry.addSvgIcon(
+      'icon_excel',
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        'assets/icons/excel_icon.svg'
+      )
+    );
   }
 
   ngOnInit(): void {
@@ -44,6 +57,15 @@ export class TarjetaMainComponent implements OnInit, OnDestroy {
     this.tarjetaService.obtenerTarjetas(this.idUsuario).subscribe({
       next: (resp) => {
         this.dataTarjetas = resp;
+      },
+    });
+  }
+
+  descargarExcelTransacciones() {
+    this.tarjetaService.excelHistorialPorUsuario().subscribe({
+      next: (resp) => {
+        console.log(resp);
+        this.excelService.excelGeneralTarjetas(resp);
       },
     });
   }

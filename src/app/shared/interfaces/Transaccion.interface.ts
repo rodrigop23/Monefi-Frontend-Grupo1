@@ -4,6 +4,7 @@ export interface Transaccion {
   dte_fecha: string;
   var_simbolo: string;
   num_monto: number;
+  var_categoria?: string;
 }
 
 export interface TransaccionCompleta {

@@ -24,6 +24,7 @@ import localPE from '@angular/common/locales/es-PE';
 import { registerLocaleData } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTabsModule } from '@angular/material/tabs';
 
 registerLocaleData(localPE);
 
@@ -44,6 +45,7 @@ registerLocaleData(localPE);
     MatDatepickerModule,
     MatExpansionModule,
     MatSlideToggleModule,
+    MatTabsModule,
   ],
   providers: [
     {

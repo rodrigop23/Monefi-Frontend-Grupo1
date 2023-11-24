@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { BasicResponse } from 'src/app/shared/interfaces/BackResponse.interface';
@@ -43,7 +43,12 @@ export class TransaccionService {
   obtenerTransaccion(idTransaccion: number): Observable<TransaccionCompleta> {
     const url = `${this.API_URL}/${idTransaccion}`;
 
-    return this.http.get<TransaccionCompleta>(url);
+    const headers = new HttpHeaders().set(
+      'jwt-token',
+      localStorage.getItem('token') || ''
+    );
+
+    return this.http.get<TransaccionCompleta>(url, { headers });
   }
 
   actualizarTransaccion(

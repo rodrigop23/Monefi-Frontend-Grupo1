@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import {
@@ -13,6 +13,7 @@ import {
 import { ObserverService } from '../../observer/observer.service';
 import { tap } from 'rxjs/internal/operators/tap';
 import { catchError } from 'rxjs/internal/operators/catchError';
+import { ExcelTarjetaData } from 'src/app/shared/interfaces/Excel.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -25,17 +26,21 @@ export class TarjetaService {
     private observerService: ObserverService
   ) {}
 
-  registrarTarjeta(
-    datosTarjeta: Tarjeta,
-    idUsuario: number
-  ): Observable<BasicResponse> {
-    const url = this.API_URL + `/registrar/${idUsuario}`;
+  registrarTarjeta(datosTarjeta: Tarjeta): Observable<BasicResponse> {
+    const url = this.API_URL + '/registrar/';
 
-    return this.http.post<BasicResponse>(url, { datosTarjeta }).pipe(
-      catchError((err) => {
-        throw new Error(err.error.message);
-      })
+    const headers = new HttpHeaders().set(
+      'jwt-token',
+      localStorage.getItem('token') || ''
     );
+
+    return this.http
+      .post<BasicResponse>(url, { datosTarjeta }, { headers })
+      .pipe(
+        catchError((err) => {
+          throw new Error(err.error.message);
+        })
+      );
   }
 
   obtenerTarjetas(idUsuario: number): Observable<VisualizarTarjeta[]> {
@@ -63,7 +68,12 @@ export class TarjetaService {
   obtenerTarjetaPorId(idTarjeta: number): Observable<Tarjeta> {
     const url = this.API_URL + `/obtener/${idTarjeta}`;
 
-    return this.http.get<Tarjeta>(url);
+    const headers = new HttpHeaders().set(
+      'jwt-token',
+      localStorage.getItem('token') ?? ''
+    );
+
+    return this.http.get<Tarjeta>(url, { headers });
   }
 
   actualizarTarjeta(datosTarjeta: Tarjeta): Observable<BasicResponse> {
@@ -74,5 +84,22 @@ export class TarjetaService {
         throw new Error(err.error.message);
       })
     );
+  }
+
+  excelHistorialPorTarjeta(idTarjeta: number) {
+    const url = this.API_URL + `/excel/${idTarjeta}`;
+
+    return this.http.get<ExcelTarjetaData[]>(url);
+  }
+
+  excelHistorialPorUsuario() {
+    const url = this.API_URL + `/excel-general`;
+
+    const headers = new HttpHeaders().set(
+      'jwt-token',
+      localStorage.getItem('token') ?? ''
+    );
+
+    return this.http.get(url, { headers });
   }
 }

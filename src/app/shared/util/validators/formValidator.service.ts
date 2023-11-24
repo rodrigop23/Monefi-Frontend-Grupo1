@@ -53,9 +53,9 @@ export class FormValidator {
         case 'required':
           return 'Este campo es requerido';
         case 'minlength':
-          return `Este campo debe tener al menos ${errors['minlength'].requiredLength} caracteres`;
+          return `Mínimo de ${errors['minlength'].requiredLength} caracteres`;
         case 'maxlength':
-          return `Este campo debe tener un máximo ${errors['maxlength'].requiredLength} caracteres`;
+          return `Máximo de ${errors['maxlength'].requiredLength} caracteres`;
         case 'pattern':
           return 'Correo electrónico inválido';
         case 'notEqual':

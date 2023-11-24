@@ -87,6 +87,10 @@ body {
   width: 115px;
 }
 
+.mat-mdc-slide-toggle .mdc-form-field {
+  width: 1px !important;
+}
+
 /* Estilos para componentes */
 .full-width {
   width: 100%;
@@ -110,13 +114,12 @@ body {
 
 .sub-title-form {
   margin-bottom: 12px;
-  color: #020614;
+  color: #333;
   font-family: inherit;
-  font-size: 15px;
+  font-size: 16px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: normal;
-  opacity: 0.5;
 }
 
 .input-two-container {
@@ -127,4 +130,9 @@ body {
 
 .text-center {
   text-align: center;
+}
+
+.mat-mdc-tab-body-wrapper {
+  flex-grow: 1 !important;
+  display: flex !important;
 }

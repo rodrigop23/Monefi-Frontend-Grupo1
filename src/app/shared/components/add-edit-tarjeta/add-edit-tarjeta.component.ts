@@ -29,9 +29,6 @@ export class AddEditTarjetaComponent implements OnInit {
   dataDropdownEntidades: Dropdown[] = [];
   dataDropdownMonedas: Dropdown[] = [];
 
-  // TODO: ver si esto se puede llamar en el mismo service de tarjeta
-  idUsuario: number = 0;
-
   tarjetaForm: FormGroup = this.fb.group({
     PK_tarjeta: [null],
     var_tipo: ['', [Validators.required]],
@@ -81,8 +78,6 @@ export class AddEditTarjetaComponent implements OnInit {
     private _snackbarService: CustomSnackbarService
   ) {
     this.tipoTarjetas = TIPO_TARJETAS;
-
-    this.idUsuario = this.authService.usuario.PK_usuario!;
   }
 
   ngOnInit(): void {
@@ -90,7 +85,6 @@ export class AddEditTarjetaComponent implements OnInit {
 
     if (!this.router.url.includes('editar')) return;
 
-    // TODO: Verificar si ID de Tarjeta pertenece al usuario
     this.activatedRoute.params
       .pipe(switchMap(({ id }) => this.tarjetaService.obtenerTarjetaPorId(id)))
       .subscribe({
@@ -99,11 +93,12 @@ export class AddEditTarjetaComponent implements OnInit {
 
           this.tarjetaForm.patchValue(tarjeta);
         },
-        error: () => {
-          this.formValidator.handleError(
-            'No se pudo obtener la tarjeta',
-            '/tarjeta'
-          );
+        error: (err) => {
+          console.log(err);
+          // this.formValidator.handleError(
+          //   'No se pudo obtener la tarjeta',
+          //   '/tarjeta'
+          // );
         },
       });
   }
@@ -157,21 +152,19 @@ export class AddEditTarjetaComponent implements OnInit {
       return;
     }
 
-    this.tarjetaService
-      .registrarTarjeta(this.tarjetaForm.value, this.idUsuario)
-      .subscribe({
-        next: () => {
-          this.loading = true;
+    this.tarjetaService.registrarTarjeta(this.tarjetaForm.value).subscribe({
+      next: () => {
+        this.loading = true;
 
-          this.formValidator.handleResponse(
-            this.tarjetaForm,
-            'Registro de tarjeta exitoso',
-            '/tarjeta'
-          );
-        },
-        error: () => {
-          this.formValidator.handleError('Error al registrar tarjeta');
-        },
-      });
+        this.formValidator.handleResponse(
+          this.tarjetaForm,
+          'Registro de tarjeta exitoso',
+          '/tarjeta'
+        );
+      },
+      error: () => {
+        this.formValidator.handleError('Error al registrar tarjeta');
+      },
+    });
   }
 }

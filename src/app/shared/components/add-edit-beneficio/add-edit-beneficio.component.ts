@@ -27,6 +27,7 @@ export class AddEditBeneficioComponent implements OnInit {
   dataDropdownEntidades: Dropdown[] = [];
 
   loading: boolean = false;
+  IdTarjeta: number = 0;
 
   beneficioForm: FormGroup = this.fb.group({
     PK_beneficio: [null],
@@ -55,7 +56,11 @@ export class AddEditBeneficioComponent implements OnInit {
 
     this.activatedRoute.params
       .pipe(
-        switchMap(({ id }) => this.tarjetaService.obtenerTarjetaPorId(id)),
+        switchMap(({ id }) => {
+          this.IdTarjeta = id;
+
+          return this.tarjetaService.obtenerTarjetaPorId(id);
+        }),
         switchMap((tarjeta) => {
           tarjeta.var_nombre = '';
 
@@ -83,9 +88,8 @@ export class AddEditBeneficioComponent implements OnInit {
     });
   }
 
-  // todo: falta el idTarjeta
   obtenerDataTarjeta(): void {
-    this.tarjetaService.obtenerTarjetaPorId(11).subscribe({
+    this.tarjetaService.obtenerTarjetaPorId(this.IdTarjeta).subscribe({
       next: (tarjeta) => {
         tarjeta.var_nombre = '';
 

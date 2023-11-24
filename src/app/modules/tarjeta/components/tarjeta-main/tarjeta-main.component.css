@@ -4,9 +4,39 @@
   padding: 0 16px 32px 16px;
 }
 
+.helper-header {
+  width: 48px;
+  height: 48px;
+}
+
+.tarjeta-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 0px 16px 0px;
+}
+
+.tarjeta-header-title {
+  color: var(--main-blue-color);
+  text-align: center;
+  font-family: inherit;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  flex: 1 0 0;
+}
+
 .contenido {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
   gap: 12px;
+}
+
+.icon-dots {
+  height: 24px;
+  width: 24px;
+  font-size: 24px;
 }
