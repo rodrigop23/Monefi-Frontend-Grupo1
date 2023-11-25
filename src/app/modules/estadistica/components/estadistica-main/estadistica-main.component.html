@@ -1,113 +1,197 @@
 <div class="estadistica-main-container">
-  <app-header titulo="Estadísticas" [back]="false"></app-header>
+  <div class="header-title">Estadísticas</div>
 
   <mat-tab-group>
-    <mat-tab label="Generales">Content 1</mat-tab>
-    <mat-tab label="Por Tarjeta">Content 2</mat-tab>
-  </mat-tab-group>
-
-  <div class="wrapper">
-    <div class="limite-container">
-      <div>
-        <div class="limite-title">Límite Máximo</div>
-        <div class="limite-monto">S/. {{ limiteTotal }}</div>
-      </div>
-      <div class="mes-container">
-        <mat-form-field>
-          <mat-label>Seleccione un mes</mat-label>
-          <mat-select [formControl]="mesActual" (selectionChange)="cambioMes()">
-            <mat-option *ngFor="let mes of mesesLista" [value]="mes.valor">
-              {{ mes.nombre }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div>
-
-    <ng-container *ngIf="pieChartData.labels!.length > 0; else noData">
-      <div class="grafico-container">
-        <div class="gasto-container">
-          <div class="gasto-title">Gasto Acumulado</div>
-          <div class="gasto-monto-container">
-            <div class="gasto-monto">S/. {{ gastoAcumulado }}</div>
-            <div class="porcentaje-container" *ngIf="limiteTotal">
-              <ng-container *ngIf="limiteTotal > gastoAcumulado; else mayor">
-                <mat-icon class="icon-green">arrow_drop_down</mat-icon>
-              </ng-container>
-              <ng-template #mayor>
-                <mat-icon class="icon-red">arrow_drop_up</mat-icon>
-              </ng-template>
-
-              <div
-                [ngClass]="
-                  limiteTotal > gastoAcumulado ? 'icon-green' : 'icon-red'
-                "
-                class="porcentaje-text"
+    <mat-tab label="Generales">
+      <div class="wrapper">
+        <div class="limite-container">
+          <div>
+            <div class="limite-title">Límite Máximo</div>
+            <div class="limite-monto">S/. {{ limiteTotal }}</div>
+          </div>
+          <div class="mes-container">
+            <mat-form-field>
+              <mat-label>Seleccione un mes</mat-label>
+              <mat-select
+                [formControl]="mesActual"
+                (selectionChange)="cambioMes()"
               >
-                {{ (gastoAcumulado * 100) / limiteTotal | number : "1.2-2" }}%
-              </div>
-            </div>
+                <mat-option *ngFor="let mes of mesesLista" [value]="mes.valor">
+                  {{ mes.nombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
         </div>
 
-        <!-- <canvas
-          baseChart
-          type="pie"
-          [data]="pieChartData"
-          [options]="pieChartOptions"
-        ></canvas> -->
-
-        <canvas
-          baseChart
-          [type]="barChartType"
-          class="chart"
-          [data]="barChartData"
-          [options]="barChartOptions"
-        >
-        </canvas>
-
-        <button mat-button (click)="randomize()">Cambiar Gráfico</button>
-
-        <div class="categoria-container">
-          <div class="categoria-title">Gastos por Categoría</div>
-          <mat-accordion>
-            <ng-container *ngFor="let categoria of dataCategorias">
-              <mat-expansion-panel class="accordion-panel">
-                <mat-expansion-panel-header
-                  [collapsedHeight]="'56px'"
-                  [expandedHeight]="'56px'"
-                >
-                  <mat-panel-title class="accordion-header">
-                    {{ categoria.var_nombre }}
-                  </mat-panel-title>
-                </mat-expansion-panel-header>
-                <div class="transaccion-list">
+        <ng-container *ngIf="pieChartData.labels!.length > 0; else noData">
+          <div class="grafico-container">
+            <div class="gasto-container">
+              <div class="gasto-title">Gasto Acumulado</div>
+              <div class="gasto-monto-container">
+                <div class="gasto-monto">S/. {{ gastoAcumulado }}</div>
+                <div class="porcentaje-container" *ngIf="limiteTotal">
                   <ng-container
-                    *ngFor="let transaccion of categoria.transaccion"
+                    *ngIf="limiteTotal > gastoAcumulado; else mayor"
                   >
-                    <shared-list-item
-                      [transaccion]="transaccion"
-                    ></shared-list-item>
+                    <mat-icon class="icon-green">arrow_drop_down</mat-icon>
                   </ng-container>
-                </div>
-              </mat-expansion-panel>
-            </ng-container>
-          </mat-accordion>
-        </div>
-      </div>
-    </ng-container>
+                  <ng-template #mayor>
+                    <mat-icon class="icon-red">arrow_drop_up</mat-icon>
+                  </ng-template>
 
-    <ng-template #noData>
-      <div class="no-data-container">
-        <div class="text-center">No hay transacciones registradas</div>
-        <div *ngIf="mesActual.value === nuevoMes">
-          <shared-default-button
-            text="Registrar Transacción"
-            [defaultButton]="false"
-            routerLink="/transaccion/registrar"
-          ></shared-default-button>
-        </div>
-      </div>
-    </ng-template>
-  </div>
+                  <div
+                    [ngClass]="
+                      limiteTotal > gastoAcumulado ? 'icon-green' : 'icon-red'
+                    "
+                    class="porcentaje-text"
+                  >
+                    {{
+                      (gastoAcumulado * 100) / limiteTotal | number : "1.2-2"
+                    }}%
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <canvas
+              baseChart
+              type="pie"
+              [data]="pieChartData"
+              [options]="pieChartOptions"
+            ></canvas>
+
+            <div class="categoria-container">
+              <div class="categoria-title">Gastos por Categoría</div>
+              <mat-accordion>
+                <ng-container *ngFor="let categoria of dataCategorias">
+                  <mat-expansion-panel class="accordion-panel">
+                    <mat-expansion-panel-header
+                      [collapsedHeight]="'56px'"
+                      [expandedHeight]="'56px'"
+                    >
+                      <mat-panel-title class="accordion-header">
+                        {{ categoria.var_nombre }}
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="transaccion-list">
+                      <ng-container
+                        *ngFor="let transaccion of categoria.transaccion"
+                      >
+                        <shared-list-item
+                          [transaccion]="transaccion"
+                        ></shared-list-item>
+                      </ng-container>
+                    </div>
+                  </mat-expansion-panel>
+                </ng-container>
+              </mat-accordion>
+            </div>
+          </div>
+        </ng-container>
+
+        <ng-template #noData>
+          <div class="no-data-container">
+            <div class="text-center">No hay transacciones registradas</div>
+            <div *ngIf="mesActual.value === nuevoMes">
+              <shared-default-button
+                text="Registrar Transacción"
+                [defaultButton]="false"
+                routerLink="/transaccion/registrar"
+              ></shared-default-button>
+            </div>
+          </div>
+        </ng-template></div
+    ></mat-tab>
+
+    <mat-tab label="Por Tarjeta">
+      <ng-template matTabContent>
+        <div class="wrapper">
+          <div class="limite-container">
+            <div>
+              <div class="limite-title">Gasto Acumulado</div>
+              <div class="limite-monto">
+                {{
+                gastoAcumuladoPorTarjeta.toLocaleString("es-PE", {
+                  style: "currency",
+                  currency: "PEN",
+                  minimumFractionDigits: 0,
+                })
+                }}
+              </div>
+            </div>
+            <div class="mes-container">
+              <mat-form-field>
+                <mat-label>Seleccione una tarjeta</mat-label>
+                <mat-select
+                  [formControl]="idTarjeta"
+                  (selectionChange)="cambioTarjeta()"
+                >
+                  <mat-option
+                    *ngFor="let tarjeta of listaTarjetas"
+                    [value]="tarjeta.PK_tarjeta"
+                  >
+                    {{ tarjeta.var_nombre }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <ng-container *ngIf="barChartData.labels!.length > 0; else noData">
+            <div class="grafico-container">
+              <canvas
+                baseChart
+                [type]="barChartType"
+                class="chart"
+                [data]="barChartData"
+                [options]="barChartOptions"
+              >
+              </canvas>
+
+              <button mat-button (click)="randomize()">Cambiar Gráfico</button>
+
+              <div class="categoria-container">
+                <div class="categoria-title">Gastos por Mes</div>
+                <mat-accordion>
+                  <ng-container *ngFor="let item of dataCategoriaMensualArray">
+                    <mat-expansion-panel class="accordion-panel">
+                      <mat-expansion-panel-header
+                        [collapsedHeight]="'56px'"
+                        [expandedHeight]="'56px'"
+                      >
+                        <mat-panel-title class="accordion-header">
+                          {{ item.mes }}
+                        </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <div class="transaccion-list">
+                        <ng-container
+                          *ngFor="let transaccion of item.categoria"
+                        >
+                          <shared-list-item
+                            [transaccion]="transaccion"
+                          ></shared-list-item>
+                        </ng-container>
+                      </div>
+                    </mat-expansion-panel>
+                  </ng-container>
+                </mat-accordion>
+              </div>
+            </div>
+          </ng-container>
+
+          <ng-template #noData>
+            <div class="no-data-container">
+              <div class="text-center">No hay transacciones registradas</div>
+
+              <shared-default-button
+                text="Registrar Transacción"
+                [defaultButton]="false"
+                routerLink="/transaccion/registrar"
+              ></shared-default-button>
+            </div>
+          </ng-template></div
+      ></ng-template>
+    </mat-tab>
+  </mat-tab-group>
 </div>

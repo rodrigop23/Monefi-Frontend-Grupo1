@@ -91,6 +91,28 @@ body {
   width: 1px !important;
 }
 
+.mat-mdc-tab-group {
+  flex: 1 !important;
+}
+
+.mat-mdc-tab-body-wrapper {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+.mat-mdc-tab-body-content {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.mat-mdc-tab-body {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
 /* Estilos para componentes */
 .full-width {
   width: 100%;

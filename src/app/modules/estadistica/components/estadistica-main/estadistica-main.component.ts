@@ -1,11 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ChartConfiguration, ChartData, ChartType } from 'chart.js';
+import { tap } from 'rxjs/internal/operators/tap';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { EstadisticaService } from 'src/app/core/services/http/estadistica/estadistica.service';
+import { TarjetaService } from 'src/app/core/services/http/tarjeta/tarjeta.service';
 import { LISTA_MESES } from 'src/app/shared/constants/Meses.constant';
 import { Constant } from 'src/app/shared/interfaces/Constant.interface';
-import { Categoria } from 'src/app/shared/interfaces/Estadistica.interface';
+import {
+  Categoria,
+  TransaccionesEstadistica,
+  TransaccionesPorMes,
+} from 'src/app/shared/interfaces/Estadistica.interface';
+
+interface TarjetaMenu {
+  PK_tarjeta: number;
+  var_nombre: string;
+}
 
 @Component({
   selector: 'app-estadistica-main',
@@ -25,31 +36,6 @@ export class EstadisticaMainComponent implements OnInit {
   mesActual = new FormControl(this.nuevoMes, [Validators.required]);
 
   dataCategorias: Categoria[] = [];
-
-  public barChartOptions: ChartConfiguration['options'] = {
-    responsive: true,
-    scales: {
-      x: {},
-      y: {
-        min: 10,
-      },
-    },
-    plugins: {
-      legend: {
-        display: true,
-      },
-    },
-  };
-  public barChartType: ChartType = 'bar';
-
-  public barChartData: ChartData<'bar'> = {
-    labels: ['2006', '2007', '2008', '2009', '2010', '2011', '2012'],
-    datasets: [{ data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' }],
-  };
-
-  public randomize(): void {
-    this.barChartType = this.barChartType === 'bar' ? 'line' : 'bar';
-  }
 
   pieChartOptions: ChartConfiguration['options'] = {
     responsive: true,
@@ -74,15 +60,58 @@ export class EstadisticaMainComponent implements OnInit {
     ],
   } as ChartData<'pie', number[], string | string[]>;
 
+  // ? Por Tarjeta
+
+  idTarjeta: FormControl = new FormControl('', [Validators.required]);
+
+  listaTarjetas: TarjetaMenu[] = [];
+
+  gastoAcumuladoPorTarjeta: number = 0;
+
+  dataCategoriaMensual: TransaccionesPorMes = {} as TransaccionesPorMes;
+
+  dataCategoriaMensualArray: {
+    mes: string;
+    categoria: TransaccionesEstadistica[];
+  }[] = [];
+
+  public barChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    scales: {
+      x: {},
+      y: {
+        min: 0,
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,
+      },
+    },
+  };
+  public barChartType: ChartType = 'bar';
+
+  public barChartData: ChartData<'bar'> = {
+    labels: [],
+    datasets: [{ data: [] }],
+  };
+
+  public randomize(): void {
+    this.barChartType = this.barChartType === 'bar' ? 'line' : 'bar';
+  }
+
   constructor(
     private estadisticaService: EstadisticaService,
-    private authService: AuthService
+    private authService: AuthService,
+    private tarjetaService: TarjetaService
   ) {
     this.idUsuario = this.authService.usuario.PK_usuario!;
   }
 
   ngOnInit(): void {
     this.obtenerEstadisticasMensuales();
+
+    this.obtenerTarjetasPorUsuario();
   }
 
   obtenerEstadisticasMensuales() {
@@ -102,5 +131,45 @@ export class EstadisticaMainComponent implements OnInit {
 
   cambioMes() {
     this.obtenerEstadisticasMensuales();
+  }
+
+  // ? Por Tarjeta
+
+  obtenerTarjetasPorUsuario() {
+    this.tarjetaService
+      .obtenerTarjetas()
+      .pipe(
+        tap((resp) => {
+          this.idTarjeta.setValue(resp[0].PK_tarjeta);
+          this.obtenerEstadisticasPorTarjeta();
+        })
+      )
+      .subscribe({
+        next: (resp) => {
+          this.listaTarjetas = resp;
+        },
+      });
+  }
+
+  obtenerEstadisticasPorTarjeta() {
+    this.estadisticaService
+      .obtenerEstadisticaPorTarjeta(this.idTarjeta.value)
+      .subscribe({
+        next: (resp) => {
+          this.gastoAcumuladoPorTarjeta = resp.gastoAcumulado;
+
+          this.barChartData = resp.barChartData;
+
+          this.dataCategoriaMensual = resp.transaccionesPorMes;
+
+          this.dataCategoriaMensualArray = Object.keys(
+            this.dataCategoriaMensual
+          ).map((mes) => ({ mes, categoria: this.dataCategoriaMensual[mes] }));
+        },
+      });
+  }
+
+  cambioTarjeta() {
+    this.obtenerEstadisticasPorTarjeta();
   }
 }

@@ -43,10 +43,15 @@ export class TarjetaService {
       );
   }
 
-  obtenerTarjetas(idUsuario: number): Observable<VisualizarTarjeta[]> {
-    const url = this.API_URL + `/obtener/todo/${idUsuario}`;
+  obtenerTarjetas(): Observable<VisualizarTarjeta[]> {
+    const url = this.API_URL + `/obtener/todo`;
 
-    return this.http.get<VisualizarTarjeta[]>(url);
+    const headers = new HttpHeaders().set(
+      'jwt-token',
+      localStorage.getItem('token') ?? ''
+    );
+
+    return this.http.get<VisualizarTarjeta[]>(url, { headers });
   }
 
   obtenerHistorialPorIdTarjeta(

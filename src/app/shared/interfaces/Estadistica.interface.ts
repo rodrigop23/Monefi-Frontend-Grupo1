@@ -14,3 +14,21 @@ export interface Categoria {
   transaccion: Transaccion[];
   value: number;
 }
+
+export interface EstadisticaTarjetaResponse {
+  transaccionesPorMes: TransaccionesPorMes;
+  gastoAcumulado: number;
+  barChartData: ChartData<'bar'>;
+}
+
+export interface TransaccionesPorMes {
+  [mes: string]: TransaccionesEstadistica[];
+}
+export interface TransaccionesEstadistica {
+  PK_transaccion: number;
+  num_monto: number;
+  dte_fecha: string;
+  var_nombre: string;
+  var_simbolo: string;
+  mes: string;
+}

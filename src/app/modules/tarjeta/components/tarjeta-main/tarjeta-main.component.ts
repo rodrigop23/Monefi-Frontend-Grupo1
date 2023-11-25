@@ -14,8 +14,6 @@ import { VisualizarTarjeta } from 'src/app/shared/interfaces/Tarjeta.interface';
   styleUrls: ['./tarjeta-main.component.css'],
 })
 export class TarjetaMainComponent implements OnInit, OnDestroy {
-  idUsuario: number = 0;
-
   dataTarjetas: VisualizarTarjeta[] = [];
 
   suscripcion: Subscription = new Subscription();
@@ -28,8 +26,6 @@ export class TarjetaMainComponent implements OnInit, OnDestroy {
     private domSanitizer: DomSanitizer,
     private excelService: ExceljsService
   ) {
-    this.idUsuario = this.authService.usuario.PK_usuario!;
-
     this.matIconRegistry.addSvgIcon(
       'icon_excel',
       this.domSanitizer.bypassSecurityTrustResourceUrl(
@@ -53,7 +49,7 @@ export class TarjetaMainComponent implements OnInit, OnDestroy {
   }
 
   obtenerTarjetasPorUsuario() {
-    this.tarjetaService.obtenerTarjetas(this.idUsuario).subscribe({
+    this.tarjetaService.obtenerTarjetas().subscribe({
       next: (resp) => {
         this.dataTarjetas = resp;
       },

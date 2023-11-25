@@ -4,13 +4,27 @@
   flex-direction: column;
 }
 
+.header-title {
+  color: var(--main-blue-color);
+  text-align: center;
+  font-family: inherit;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 24px 0px 4px 0px;
+}
+
 .limite-container {
   display: flex;
   flex-direction: row;
 }
 
 .wrapper {
-  padding: 0 16px 16px 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px;
 }
 
 .limite-title {
