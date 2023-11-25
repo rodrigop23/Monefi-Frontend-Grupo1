@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ExceljsService } from 'src/app/core/services/exceljs/exceljs.service';
+import { BeneficioService } from 'src/app/core/services/http/beneficio/beneficio.service';
 import { TarjetaService } from 'src/app/core/services/http/tarjeta/tarjeta.service';
 import { ObserverService } from 'src/app/core/services/observer/observer.service';
 import { CustomDialogService } from 'src/app/shared/components/custom-dialog/service/custom-dialog.service';
@@ -20,6 +21,9 @@ export class TarjetaDetalleComponent implements OnInit {
   dataTarjeta: VisualizarTarjeta = {} as VisualizarTarjeta;
   dataTransacciones: Transaccion[] = [];
 
+  dataTarjetaBeneficios: VisualizarTarjeta = {} as VisualizarTarjeta;
+  dataBeneficios: Transaccion[] = [];
+
   idTarjeta: number = 0;
 
   constructor(
@@ -28,7 +32,8 @@ export class TarjetaDetalleComponent implements OnInit {
     private observerService: ObserverService,
     private dialogService: CustomDialogService,
     private excelService: ExceljsService,
-    private _snackbarService: CustomSnackbarService
+    private _snackbarService: CustomSnackbarService,
+    private beneficioService: BeneficioService
   ) {
     this.idTarjeta = this.router.snapshot.paramMap.get(
       'id'
@@ -38,9 +43,13 @@ export class TarjetaDetalleComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerDataTarjeta();
 
+    this.obtenerDataBeneficiosAcumulados();
+
     this.observerService.refresh$.subscribe({
       next: () => {
         this.obtenerDataTarjeta();
+
+        this.obtenerDataBeneficiosAcumulados();
       },
     });
   }
@@ -48,12 +57,21 @@ export class TarjetaDetalleComponent implements OnInit {
   obtenerDataTarjeta() {
     this.tarjetaService.obtenerHistorialPorIdTarjeta(this.idTarjeta).subscribe({
       next: (resp) => {
-        console.log(resp);
-
         this.dataTarjeta = resp.tarjeta;
         this.dataTransacciones = resp.transacciones;
       },
     });
+  }
+
+  obtenerDataBeneficiosAcumulados() {
+    this.beneficioService
+      .obtenerBeneficiosPorTransaccion(this.idTarjeta)
+      .subscribe({
+        next: (resp) => {
+          this.dataTarjetaBeneficios = resp.tarjeta;
+          this.dataBeneficios = resp.transacciones;
+        },
+      });
   }
 
   abrirSnackbar(icono: string, mensaje: string, tipo: TipoSnackbar) {
@@ -71,6 +89,14 @@ export class TarjetaDetalleComponent implements OnInit {
       if (res) {
         this.tarjetaService.excelHistorialPorTarjeta(this.idTarjeta).subscribe({
           next: (resp) => {
+            if (resp.length === 0) {
+              this.abrirSnackbar(
+                'error',
+                'No hay transacciones para descargar',
+                'error'
+              );
+            }
+
             this.excelService.excelTarjeta(resp);
 
             this.abrirSnackbar(

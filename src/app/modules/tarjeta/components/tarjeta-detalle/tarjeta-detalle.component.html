@@ -1,7 +1,6 @@
 <div class="detalle-main-container">
-  <!-- <app-header titulo="" [back]="true" path="/tarjeta"></app-header> -->
-
   <mat-tab-group class="tab-group">
+    <!-- Historial de Gastos -->
     <mat-tab label="Historial de Gastos">
       <div class="tab-item">
         <div class="detalle-tarjeta">
@@ -39,6 +38,32 @@
         </button>
       </div>
     </mat-tab>
-    <mat-tab label="Beneficios Acumulados" class="tab-item"></mat-tab>
+
+    <!-- Beneficio Acumulados -->
+    <mat-tab label="Beneficios Acumulados" class="tab-item">
+      <div class="tab-item">
+        <div class="detalle-tarjeta">
+          <shared-custom-tarjeta
+            [tarjeta]="dataTarjetaBeneficios"
+            [menu]="false"
+          ></shared-custom-tarjeta>
+        </div>
+
+        <div class="transaccion-list">
+          <div *ngIf="dataBeneficios.length === 0" class="no-transaccion-data">
+            <div class="text-no-data">No existe un beneficio registrado</div>
+            <shared-default-button
+              [defaultButton]="false"
+              text="Registrar Beneficio"
+              routerLink="/beneficio/registrar/{{ dataTarjeta.PK_tarjeta }}"
+            ></shared-default-button>
+          </div>
+
+          <ng-container *ngFor="let beneficio of dataBeneficios">
+            <shared-list-item [transaccion]="beneficio"></shared-list-item>
+          </ng-container>
+        </div>
+      </div>
+    </mat-tab>
   </mat-tab-group>
 </div>

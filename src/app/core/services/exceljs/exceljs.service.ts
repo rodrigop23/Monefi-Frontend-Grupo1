@@ -109,6 +109,8 @@ export class ExceljsService {
     const columnasNuevas: any = {};
 
     dataSource.forEach((arreglo: ExcelTarjetaData[], indice: number) => {
+      if (arreglo.length === 0) return;
+
       arreglos[arreglo[0].var_nombre_tarjeta] = arreglo;
       columnasNuevas[indice] = columnas;
     });

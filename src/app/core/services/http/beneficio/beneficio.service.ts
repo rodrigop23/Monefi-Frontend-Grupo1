@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import {
   BasicResponse,
   BeneficioResponse,
+  HistorialResponse,
 } from 'src/app/shared/interfaces/BackResponse.interface';
 import { Beneficio } from 'src/app/shared/interfaces/Beneficio.interface';
 import { environment } from 'src/environments/environment';
@@ -45,5 +46,11 @@ export class BeneficioService {
     return this.http
       .delete<BasicResponse>(url)
       .pipe(tap(() => this.observerService.refresh$.next()));
+  }
+
+  obtenerBeneficiosPorTransaccion(idTarjeta: number) {
+    const url = `${this.API_URL}/obtenerPorTransaccion/${idTarjeta}`;
+
+    return this.http.get<HistorialResponse>(url);
   }
 }

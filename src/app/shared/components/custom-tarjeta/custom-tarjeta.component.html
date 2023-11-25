@@ -5,7 +5,7 @@
     <div class="tarjetaName">{{ tarjeta.var_nombre }}</div>
 
     <div class="tarjetaPrice">
-      {{ tarjeta.simbolo_moneda + " " + (tarjeta.total_transacciones || 0) }}
+      {{ tarjeta.total_transacciones }}
     </div>
 
     <ng-container *ngIf="menu">

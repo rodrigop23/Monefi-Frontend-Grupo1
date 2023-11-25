@@ -2,12 +2,15 @@
   min-height: var(--full-height);
   display: flex;
   flex-direction: column;
-  padding: 0 16px 16px 16px;
 }
 
 .limite-container {
   display: flex;
   flex-direction: row;
+}
+
+.wrapper {
+  padding: 0 16px 16px 16px;
 }
 
 .limite-title {
