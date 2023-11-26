@@ -1,3 +1,37 @@
 <div class="notificacion-main-container">
   <app-header titulo="Notificaciones" [back]="true" path="/perfil"></app-header>
+
+  <div class="alert-container">
+    <div *ngFor="let alerta of dataAlerta">
+      <div
+        class="alert-list-container"
+        (click)="actualizarAlerta(alerta)"
+        [ngClass]="alerta.bool_activo ? 'active' : 'inactive'"
+      >
+        <div class="imagen-container">
+          <div *ngIf="alerta.bool_activo" class="dot"></div>
+          <img src="assets/icons/alert.png" height="48px" width="48px" alt="" />
+        </div>
+        <div class="alert-content">
+          <ng-container *ngIf="alerta.var_tipo == 'SUPERO'; else otraAlerta">
+            <div class="alert-text">
+              Se ha excedido del límite de línea de la tarjeta
+              <span>{{ alerta.nombre_tarjeta }}</span> en
+              <span>{{ alerta.num_monto | currency : "PEN" }}</span>
+            </div>
+          </ng-container>
+          <ng-template #otraAlerta>
+            <div class="alert-text">
+              La tarjeta <span>{{ alerta.nombre_tarjeta }}</span> está cerca de
+              su límite de línea en
+              <span>{{ alerta.num_monto | currency : "PEN" }}</span>
+            </div>
+          </ng-template>
+          <div class="alert-date">
+            {{ alerta.dte_fecha | date : "dd MMM yyyy '-' hh:mm a" }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

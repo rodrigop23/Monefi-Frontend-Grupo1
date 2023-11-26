@@ -3,4 +3,76 @@
   display: flex;
   flex-direction: column;
   padding: 0 16px 24px 16px;
+  background-color: #fdfdfd;
+}
+
+.alert-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.alert-list-container {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 10px 10px 54px 0px rgba(15, 13, 35, 0.04);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px;
+  gap: 16px;
+  cursor: pointer;
+}
+
+.active {
+  background: #f5f5f5;
+}
+
+.inactive {
+  background: #fff;
+}
+
+.alert-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.alert-content span {
+  font-weight: 600;
+}
+
+.alert-text {
+  color: #100d40;
+  font-family: inherit;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+.alert-date {
+  color: #999;
+  font-family: inherit;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.imagen-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #100d40;
 }

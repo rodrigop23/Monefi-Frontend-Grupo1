@@ -156,7 +156,7 @@ export class AddEditTransaccionComponent implements OnInit {
             if (res.superoLimite) {
               this.abrirSnackbar(
                 'notification',
-                `Se ha excedido del limite de linea de la tarjeta ${
+                `Se ha excedido del límite de línea de la tarjeta ${
                   res.nombre_tarjeta
                 } en ${res.monto.toLocaleString('es-PE', {
                   style: 'currency',
@@ -174,7 +174,7 @@ export class AddEditTransaccionComponent implements OnInit {
                 'notification',
                 `La tarjeta ${
                   res.nombre_tarjeta
-                } esta cerca de su limite de linea en ${res.monto.toLocaleString(
+                } está cerca de su límite de línea en ${res.monto.toLocaleString(
                   'es-PE',
                   {
                     style: 'currency',

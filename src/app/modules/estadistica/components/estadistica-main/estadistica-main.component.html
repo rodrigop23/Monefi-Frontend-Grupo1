@@ -112,11 +112,8 @@
               <div class="limite-title">Gasto Acumulado</div>
               <div class="limite-monto">
                 {{
-                gastoAcumuladoPorTarjeta.toLocaleString("es-PE", {
-                  style: "currency",
-                  currency: "PEN",
-                  minimumFractionDigits: 0,
-                })
+                  gastoAcumuladoPorTarjeta
+                    | currency : "PEN" : "symbol" : "1.0-0"
                 }}
               </div>
             </div>
