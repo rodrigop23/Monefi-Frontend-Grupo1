@@ -75,7 +75,9 @@ export class FormValidator {
   }
 
   handleResponse(form: FormGroup, mensaje: string, path: string) {
-    this._snackbarService.loadSnackBar('check_circle', mensaje, 'success');
+    if (mensaje) {
+      this._snackbarService.loadSnackBar('check_circle', mensaje, 'success');
+    }
 
     setTimeout(() => {
       form.reset();

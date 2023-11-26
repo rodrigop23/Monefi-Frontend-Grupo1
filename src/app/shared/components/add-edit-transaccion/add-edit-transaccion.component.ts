@@ -13,6 +13,7 @@ import {
   CustomSnackbarService,
   TipoSnackbar,
 } from '../custom-snackbar/service/custom-snackbar.service';
+import { TransaccionResponse } from '../../interfaces/BackResponse.interface';
 
 @Component({
   selector: 'app-add-edit-transaccion',
@@ -97,6 +98,44 @@ export class AddEditTransaccionComponent implements OnInit {
     this._snackbarService.loadSnackBar(icono, mensaje, tipo);
   }
 
+  // todo: hacer que funcione esto
+  manejarAlertas(res: TransaccionResponse) {
+    if (res.superoLimite) {
+      this.abrirSnackbar(
+        'notification',
+        `Se ha excedido del limite de linea de la tarjeta ${
+          res.nombre_tarjeta
+        } en ${res.monto.toLocaleString('es-PE', {
+          style: 'currency',
+          currency: 'PEN',
+        })}`,
+        'notification'
+      );
+
+      this.router.navigate(['/transaccion']);
+      return;
+    }
+
+    if (res.cercaLimite) {
+      this.abrirSnackbar(
+        'notification',
+        `La tarjeta ${
+          res.nombre_tarjeta
+        } esta cerca de su limite de linea en ${res.monto.toLocaleString(
+          'es-PE',
+          {
+            style: 'currency',
+            currency: 'PEN',
+          }
+        )}`,
+        'notification'
+      );
+
+      this.router.navigate(['/transaccion']);
+      return;
+    }
+  }
+
   onSubmit() {
     if (this.transaccionForm.invalid) {
       return this.transaccionForm.markAllAsTouched();
@@ -110,11 +149,45 @@ export class AddEditTransaccionComponent implements OnInit {
           'warning'
         );
       }
-
       this.transaccionService
         .actualizarTransaccion(this.transaccionForm.value)
         .subscribe({
-          next: () => {
+          next: (res) => {
+            if (res.superoLimite) {
+              this.abrirSnackbar(
+                'notification',
+                `Se ha excedido del limite de linea de la tarjeta ${
+                  res.nombre_tarjeta
+                } en ${res.monto.toLocaleString('es-PE', {
+                  style: 'currency',
+                  currency: 'PEN',
+                })}`,
+                'notification'
+              );
+
+              this.router.navigate(['/transaccion']);
+              return;
+            }
+
+            if (res.cercaLimite) {
+              this.abrirSnackbar(
+                'notification',
+                `La tarjeta ${
+                  res.nombre_tarjeta
+                } esta cerca de su limite de linea en ${res.monto.toLocaleString(
+                  'es-PE',
+                  {
+                    style: 'currency',
+                    currency: 'PEN',
+                  }
+                )}`,
+                'notification'
+              );
+
+              this.router.navigate(['/transaccion']);
+              return;
+            }
+
             this.loading = true;
 
             this.formValidator.handleResponse(
@@ -127,14 +200,50 @@ export class AddEditTransaccionComponent implements OnInit {
             this.formValidator.handleError('Error al actualizar transacción');
           },
         });
-
       return;
     }
 
     this.transaccionService
       .registrarTransaccion(this.transaccionForm.value)
       .subscribe({
-        next: () => {
+        next: (res) => {
+          console.log(res);
+
+          if (res.superoLimite) {
+            this.abrirSnackbar(
+              'notification',
+              `Se ha excedido del limite de linea de la tarjeta ${
+                res.nombre_tarjeta
+              } en ${res.monto.toLocaleString('es-PE', {
+                style: 'currency',
+                currency: 'PEN',
+              })}`,
+              'notification'
+            );
+
+            this.router.navigate(['/transaccion']);
+            return;
+          }
+
+          if (res.cercaLimite) {
+            this.abrirSnackbar(
+              'notification',
+              `La tarjeta ${
+                res.nombre_tarjeta
+              } esta cerca de su limite de linea en ${res.monto.toLocaleString(
+                'es-PE',
+                {
+                  style: 'currency',
+                  currency: 'PEN',
+                }
+              )}`,
+              'notification'
+            );
+
+            this.router.navigate(['/transaccion']);
+            return;
+          }
+
           this.loading = true;
 
           this.formValidator.handleResponse(
@@ -143,7 +252,8 @@ export class AddEditTransaccionComponent implements OnInit {
             '/transaccion'
           );
         },
-        error: () => {
+        error: (err) => {
+          console.log(err);
           this.formValidator.handleError('Error al registrar transacción');
         },
       });

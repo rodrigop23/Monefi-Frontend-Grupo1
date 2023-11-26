@@ -8,6 +8,13 @@ export interface BasicResponse {
   message: string;
 }
 
+export interface TransaccionResponse extends BasicResponse {
+  superoLimite: boolean;
+  cercaLimite: boolean;
+  monto: number;
+  nombre_tarjeta: string;
+}
+
 export interface LoginResponse extends BasicResponse {
   PK_usuario: number;
   var_nombre: string;

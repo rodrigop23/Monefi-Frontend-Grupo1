@@ -1,7 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { BasicResponse } from 'src/app/shared/interfaces/BackResponse.interface';
+import {
+  BasicResponse,
+  TransaccionResponse,
+} from 'src/app/shared/interfaces/BackResponse.interface';
 import {
   Transaccion,
   TransaccionCompleta,
@@ -30,10 +33,10 @@ export class TransaccionService {
 
   registrarTransaccion(
     datosTransaccion: TransaccionCompleta
-  ): Observable<BasicResponse> {
+  ): Observable<TransaccionResponse> {
     const url = `${this.API_URL}/registrar`;
 
-    return this.http.post<BasicResponse>(url, { datosTransaccion }).pipe(
+    return this.http.post<TransaccionResponse>(url, { datosTransaccion }).pipe(
       catchError((err) => {
         throw new Error(err.error.message);
       })
@@ -53,10 +56,10 @@ export class TransaccionService {
 
   actualizarTransaccion(
     dataTransaccion: TransaccionCompleta
-  ): Observable<BasicResponse> {
+  ): Observable<TransaccionResponse> {
     const url = `${this.API_URL}/actualizar`;
 
-    return this.http.put<BasicResponse>(url, { dataTransaccion }).pipe(
+    return this.http.put<TransaccionResponse>(url, { dataTransaccion }).pipe(
       catchError((err) => {
         throw new Error(err.error.message);
       })

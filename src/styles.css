@@ -61,6 +61,13 @@ body {
   --mdc-snackbar-supporting-text-weight: 600 !important;
 }
 
+.notification-snackbar {
+  --mdc-snackbar-container-color: #100d40 !important;
+  --mat-mdc-snack-bar-button-color: #fff !important;
+  --mdc-snackbar-supporting-text-color: #fff !important;
+  --mdc-snackbar-supporting-text-weight: 500 !important;
+}
+
 .mat-expansion-indicator::after {
   color: var(--main-blue-color) !important;
 }

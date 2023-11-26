@@ -1,4 +1,16 @@
 <div class="custom-snackbar-container">
-  <mat-icon>{{ data.icono }}</mat-icon>
+  <span>
+    <ng-container *ngIf="data.icono === 'notification'; else normal">
+      <img
+        src="../../../../assets/icons/alert.png"
+        height="48px"
+        width="48px"
+        alt=""
+      />
+    </ng-container>
+    <ng-template #normal>
+      <mat-icon>{{ data.icono }}</mat-icon>
+    </ng-template>
+  </span>
   <span>{{ data.mensaje }}</span>
 </div>
