@@ -17,6 +17,8 @@ export class TransaccionMainComponent implements OnInit, OnDestroy {
 
   dataRecurrentes: Transaccion[] = [];
 
+  dataAutomaticas: Transaccion[] = [];
+
   suscripcion: Subscription = new Subscription();
 
   constructor(
@@ -32,11 +34,15 @@ export class TransaccionMainComponent implements OnInit, OnDestroy {
 
     this.obtenerTransaccionesRecurrentes();
 
+    this.obtenerTransaccionesAutomaticas();
+
     this.suscripcion = this.observerService.refresh$.subscribe({
       next: () => {
         this.obtenerHistorialTransacciones();
 
         this.obtenerTransaccionesRecurrentes();
+
+        this.obtenerTransaccionesAutomaticas();
       },
     });
   }
@@ -60,6 +66,15 @@ export class TransaccionMainComponent implements OnInit, OnDestroy {
       next: (resp) => {
         console.log(resp);
         this.dataRecurrentes = resp;
+      },
+    });
+  }
+
+  obtenerTransaccionesAutomaticas() {
+    this.transaccionService.obtenerTransaccionesAutomaticas().subscribe({
+      next: (resp) => {
+        console.log(resp);
+        this.dataAutomaticas = resp;
       },
     });
   }

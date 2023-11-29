@@ -95,10 +95,10 @@ export class AddEditTarjetaComponent implements OnInit {
         },
         error: (err) => {
           console.log(err);
-          // this.formValidator.handleError(
-          //   'No se pudo obtener la tarjeta',
-          //   '/tarjeta'
-          // );
+          this.formValidator.handleError(
+            'No se pudo obtener la tarjeta',
+            '/tarjeta'
+          );
         },
       });
   }

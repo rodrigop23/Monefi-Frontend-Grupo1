@@ -41,6 +41,7 @@ export class AddEditTransaccionComponent implements OnInit {
     FK_transaccion_moneda: ['', [Validators.required]],
     FK_transaccion_tarjeta: ['', [Validators.required]],
     bool_recurrente: [false],
+    num_cuotas: [null],
   });
 
   constructor(
@@ -96,44 +97,6 @@ export class AddEditTransaccionComponent implements OnInit {
 
   abrirSnackbar(icono: string, mensaje: string, tipo: TipoSnackbar) {
     this._snackbarService.loadSnackBar(icono, mensaje, tipo);
-  }
-
-  // todo: hacer que funcione esto
-  manejarAlertas(res: TransaccionResponse) {
-    if (res.superoLimite) {
-      this.abrirSnackbar(
-        'notification',
-        `Se ha excedido del limite de linea de la tarjeta ${
-          res.nombre_tarjeta
-        } en ${res.monto.toLocaleString('es-PE', {
-          style: 'currency',
-          currency: 'PEN',
-        })}`,
-        'notification'
-      );
-
-      this.router.navigate(['/transaccion']);
-      return;
-    }
-
-    if (res.cercaLimite) {
-      this.abrirSnackbar(
-        'notification',
-        `La tarjeta ${
-          res.nombre_tarjeta
-        } esta cerca de su limite de linea en ${res.monto.toLocaleString(
-          'es-PE',
-          {
-            style: 'currency',
-            currency: 'PEN',
-          }
-        )}`,
-        'notification'
-      );
-
-      this.router.navigate(['/transaccion']);
-      return;
-    }
   }
 
   onSubmit() {
@@ -202,6 +165,8 @@ export class AddEditTransaccionComponent implements OnInit {
         });
       return;
     }
+
+    console.log(this.transaccionForm.value);
 
     this.transaccionService
       .registrarTransaccion(this.transaccionForm.value)

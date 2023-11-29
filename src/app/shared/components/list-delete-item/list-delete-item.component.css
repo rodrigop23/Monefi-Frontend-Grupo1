@@ -1,0 +1,47 @@
+.itemList {
+  box-shadow: 10px 24px 54px 0px rgba(15, 13, 35, 0.04);
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-radius: 10px;
+}
+
+.first-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.itemListName {
+  color: #333;
+  font-family: inherit;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.itemListPayment {
+  color: #100d40;
+  font-family: inherit;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.add-payment {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-icon {
+  width: 45px;
+  height: 45px;
+  font-size: 45px;
+}

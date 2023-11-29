@@ -129,6 +129,18 @@
         </mat-select>
         <mat-error>Seleccione una categoría</mat-error>
       </mat-form-field>
+
+      <mat-form-field
+        class="full-width"
+        [ngClass]="{
+          marginBottom: validarCamposFormulario('num_cuotas')
+        }"
+        *ngIf="transaccionForm.get('var_tipo')?.value === 'Cuotas'"
+      >
+        <mat-label>Cuotas</mat-label>
+        <input matInput type="number" formControlName="num_cuotas" />
+        <mat-error>Ingrese las cuotas</mat-error>
+      </mat-form-field>
     </div>
 
     <section>

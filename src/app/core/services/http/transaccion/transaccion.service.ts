@@ -48,7 +48,7 @@ export class TransaccionService {
 
     const headers = new HttpHeaders().set(
       'jwt-token',
-      localStorage.getItem('token') || ''
+      localStorage.getItem('token') ?? ''
     );
 
     return this.http.get<TransaccionCompleta>(url, { headers });
@@ -79,7 +79,7 @@ export class TransaccionService {
 
     const headers = new HttpHeaders().set(
       'jwt-token',
-      localStorage.getItem('token') || ''
+      localStorage.getItem('token') ?? ''
     );
 
     return this.http.get<Transaccion[]>(url, { headers });
@@ -90,11 +90,30 @@ export class TransaccionService {
 
     const headers = new HttpHeaders().set(
       'jwt-token',
-      localStorage.getItem('token') || ''
+      localStorage.getItem('token') ?? ''
     );
 
     return this.http
-      .post<BasicResponse>(url, { idTransaccion }, { headers })
+      .post<number>(url, { idTransaccion }, { headers })
+      .pipe(tap(() => this.observerService.refresh$.next()));
+  }
+
+  obtenerTransaccionesAutomaticas() {
+    const url = `${this.API_URL}/tipo/automatica`;
+
+    const headers = new HttpHeaders().set(
+      'jwt-token',
+      localStorage.getItem('token') ?? ''
+    );
+
+    return this.http.get<Transaccion[]>(url, { headers });
+  }
+
+  cancelarTransaccionAutomatica(idTransaccion: number) {
+    const url = `${this.API_URL}/cancelar/${idTransaccion}`;
+
+    return this.http
+      .delete<BasicResponse>(url)
       .pipe(tap(() => this.observerService.refresh$.next()));
   }
 }

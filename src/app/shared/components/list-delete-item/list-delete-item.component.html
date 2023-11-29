@@ -1,0 +1,18 @@
+<div class="itemList">
+  <div class="first-container">
+    <div class="itemListName">{{ transaccion.var_nombre }}</div>
+    <div class="itemListPayment">
+      <div>{{ transaccion.num_monto }}</div>
+    </div>
+  </div>
+  <div class="add-payment">
+    <button
+      mat-fab
+      color="primary"
+      class="add-icon"
+      (click)="eliminarTransaccionAutomatica()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>

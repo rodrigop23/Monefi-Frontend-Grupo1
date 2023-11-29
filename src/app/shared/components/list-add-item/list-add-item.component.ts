@@ -21,7 +21,7 @@ export class ListAddItemComponent {
       .registrarTransaccionRecurrente(this.transaccion.PK_transaccion)
       .subscribe({
         next: (res) => {
-          this.router.navigate([`/transaccion/editar/${res}`]);
+          this.router.navigate([`/transaccion/editar/${res.toString()}`]);
         },
       });
   }

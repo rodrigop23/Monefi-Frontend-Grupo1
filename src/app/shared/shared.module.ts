@@ -16,6 +16,7 @@ import { AddEditBeneficioComponent } from './components/add-edit-beneficio/add-e
 import { CustomSnackbarComponent } from './components/custom-snackbar/custom-snackbar.component';
 import { CustomSnackbarService } from './components/custom-snackbar/service/custom-snackbar.service';
 import { ListAddItemComponent } from './components/list-add-item/list-add-item.component';
+import { ListDeleteItemComponent } from './components/list-delete-item/list-delete-item.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ListAddItemComponent } from './components/list-add-item/list-add-item.c
     AddEditBeneficioComponent,
     CustomSnackbarComponent,
     ListAddItemComponent,
+    ListDeleteItemComponent,
   ],
   imports: [CommonModule, MaterialModule, ReactiveFormsModule, RouterModule],
   exports: [
@@ -43,6 +45,7 @@ import { ListAddItemComponent } from './components/list-add-item/list-add-item.c
     AddEditTransaccionComponent,
     AddEditBeneficioComponent,
     ListAddItemComponent,
+    ListDeleteItemComponent,
   ],
   providers: [CustomDialogService, CustomSnackbarService],
 })

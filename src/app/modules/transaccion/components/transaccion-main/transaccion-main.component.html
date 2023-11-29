@@ -31,6 +31,28 @@
         </div>
       </mat-expansion-panel>
 
+      <!-- Transacciones Automáticas -->
+      <mat-expansion-panel
+        class="accordion-panel"
+        [expanded]="dataAutomaticas.length > 0"
+      >
+        <mat-expansion-panel-header
+          [collapsedHeight]="'56px'"
+          [expandedHeight]="'56px'"
+        >
+          <mat-panel-title class="accordion-header">
+            Automáticas
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="transaccion-list">
+          <ng-container *ngFor="let transaccion of dataAutomaticas">
+            <shared-list-delete-item
+              [transaccion]="transaccion"
+            ></shared-list-delete-item>
+          </ng-container>
+        </div>
+      </mat-expansion-panel>
+
       <!-- Transacciones Generales -->
       <mat-expansion-panel
         class="accordion-panel"
