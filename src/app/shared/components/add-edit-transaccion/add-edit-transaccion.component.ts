@@ -7,13 +7,11 @@ import { Dropdown } from '../../interfaces/Dropdown.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DropdownService } from 'src/app/core/services/http/dropdown/dropdown.service';
 import { TransaccionService } from 'src/app/core/services/http/transaccion/transaccion.service';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { switchMap } from 'rxjs/internal/operators/switchMap';
 import {
   CustomSnackbarService,
   TipoSnackbar,
 } from '../custom-snackbar/service/custom-snackbar.service';
-import { TransaccionResponse } from '../../interfaces/BackResponse.interface';
 
 @Component({
   selector: 'app-add-edit-transaccion',

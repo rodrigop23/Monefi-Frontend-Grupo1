@@ -1,6 +1,6 @@
 import { Beneficio } from './Beneficio.interface';
 import { Dropdown } from './Dropdown.interface';
-import { Tarjeta, VisualizarTarjeta } from './Tarjeta.interface';
+import { VisualizarTarjeta } from './Tarjeta.interface';
 import { Transaccion } from './Transaccion.interface';
 
 export interface BasicResponse {

@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './beneficio-editar.component.html',
   styleUrls: ['./beneficio-editar.component.css'],
 })
-export class BeneficioEditarComponent {
-  constructor() {}
-}
+export class BeneficioEditarComponent {}

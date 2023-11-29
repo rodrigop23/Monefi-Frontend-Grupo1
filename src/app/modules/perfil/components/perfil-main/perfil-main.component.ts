@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { UsuarioService } from 'src/app/core/services/http/usuario/usuario.service';
 import { CustomDialogService } from 'src/app/shared/components/custom-dialog/service/custom-dialog.service';

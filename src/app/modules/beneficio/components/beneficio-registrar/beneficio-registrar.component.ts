@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './beneficio-registrar.component.html',
   styleUrls: ['./beneficio-registrar.component.css'],
 })
-export class BeneficioRegistrarComponent {
-  constructor() {}
-}
+export class BeneficioRegistrarComponent {}

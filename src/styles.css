@@ -160,8 +160,3 @@ body {
 .text-center {
   text-align: center;
 }
-
-.mat-mdc-tab-body-wrapper {
-  flex-grow: 1 !important;
-  display: flex !important;
-}
