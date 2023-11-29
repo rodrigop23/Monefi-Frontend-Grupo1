@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControlOptions,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { UsuarioService } from 'src/app/core/services/http/usuario/usuario.service';
 import { CustomDialogService } from 'src/app/shared/components/custom-dialog/service/custom-dialog.service';
@@ -52,7 +57,7 @@ export class CambiarContrasenaComponent {
         'var_contrasena_nueva',
         'var_confirmar_nueva'
       ),
-    }
+    } as AbstractControlOptions
   );
 
   constructor(
